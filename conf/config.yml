@@ -1,0 +1,16 @@
+raw_data:
+  filepath: "./data/01_raw/tcga_mutations_controlled.csv"
+
+columns:
+  - Patient_ID
+  - Alt_Sequence
+
+text_column: "Alt_Sequence"
+
+encoder_name: "HyenaDNA"  # or "DNABERT2"
+
+tokenizer_type: "CharacterTokenizer"  # choose a suitable tokenizer based on model
+
+device: "cpu"  # cuda, or "cpu" if you don't have a GPU
+
+output_dir: "./data/04_feature"

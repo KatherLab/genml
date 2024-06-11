@@ -1,0 +1,6 @@
+dnabert2_bpe:
+  pretrained_model_name: "zhihan1996/DNABERT-2-117M"
+
+character_tokenizer:
+  characters: ['A', 'C', 'G', 'T', 'N']
+  model_max_length: 32770  # For hyenadna-small-32k-seqlen
