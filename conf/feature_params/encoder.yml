@@ -3,6 +3,7 @@ dnabert2:
 
 hyenadna:
   pretrained_model_name: "hyenadna-small-32k-seqlen"
-  #device: "cpu"  # cuda, or "cpu" if you don't have a GPU
-  model_config_path: "../data/06_models/hyenadna_checkpoints"  # 配置文件路径
+  model_config_path: "./data/06_models/hyenadna_checkpoints"  # 配置文件路径
   download: False
+
+  

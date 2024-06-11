@@ -31,7 +31,8 @@ def cli():
 @cli.command()
 @click.option('--encoder', default=None, help='Specify encoder type (e.g., hyenadna, dnabert2)')
 @click.option('--tokenizer', default=None, help='Specify tokenizer type (e.g., character_tokenizer, dnabert2_bpe)')
-def run_pipeline(encoder, tokenizer):
+@click.option('--chunk-size', default=None, type=int, help='Specify the chunk size for concatenating sequences')
+def run_pipeline(encoder, tokenizer, chunk_size):
     """Run the main pipeline"""
     setup_logging()
     logger = logging.getLogger(__name__)
@@ -41,12 +42,14 @@ def run_pipeline(encoder, tokenizer):
 
     encoder_type = encoder if encoder else config["encoder_name"]
     tokenizer_type = tokenizer if tokenizer else config["tokenizer_type"]
+    sequence_chunk_size = chunk_size if chunk_size else config.get("sequence_chunk_size", 10)
 
     encoder_params = load_params("conf/feature_params/encoder.yml")[encoder_type]
     tokenizer_params = load_params("conf/feature_params/tokenizer.yml")[tokenizer_type]
 
     logger.info(f"Using encoder: {encoder_type} with params: {encoder_params}")
     logger.info(f"Using tokenizer: {tokenizer_type} with params: {tokenizer_params}")
+    logger.info(f"Using sequence chunk size: {sequence_chunk_size}")
 
     # Load data
     raw_data_path = config["raw_data"]["filepath"]
@@ -58,7 +61,7 @@ def run_pipeline(encoder, tokenizer):
     # Preprocess data
     text_column = config["text_column"]
     logger.info(f"Preprocessing data with text column {text_column}")
-    grouped_texts = preprocess_data(data, text_column)
+    grouped_texts = preprocess_data(data, text_column, sequence_chunk_size)
     logger.info("Data preprocessed successfully.")
 
     # Feature extraction

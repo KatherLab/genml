@@ -3,4 +3,5 @@ dnabert2_bpe:
 
 character_tokenizer:
   characters: ['A', 'C', 'G', 'T', 'N']
-  model_max_length: 32770  # For hyenadna-small-32k-seqlen
+  # CharacterTokenizerStrategy: 提供了一个可选的 model_max_length 参数。如果指定了 model_max_length, 则将所有序列填充到相同的长度, 否则保留原始长度。
+  # model_max_length: 32770  # For hyenadna-small-32k-seqlen 

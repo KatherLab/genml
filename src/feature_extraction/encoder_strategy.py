@@ -31,7 +31,7 @@ class HyenaDNAEncoderStrategy(EncoderStrategy):
         self.device = device
 
     def create_model(self, **kwargs) -> torch.nn.Module:
-        config = kwargs.get('config', None)
+        config = kwargs.get('config', None) # in case the config is setup in the encoder.yml for hyenadna
         if self.pretrained_model_name in ['hyenadna-tiny-1k-seqlen',
                                           'hyenadna-small-32k-seqlen',
                                           'hyenadna-medium-160k-seqlen',

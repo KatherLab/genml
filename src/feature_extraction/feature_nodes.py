@@ -1,31 +1,50 @@
 import pandas as pd
 import torch
 import numpy as np
+import os
+
 from typing import Dict, List
 from .encoder_factory import EncoderFactory
 from .tokenizer_factory import TokenizerFactory
 
+
 def load_data(file_path: str, columns: list) -> pd.DataFrame:
     return pd.read_csv(file_path, usecols=columns)
 
-def preprocess_data(data: pd.DataFrame, text_column: str) -> Dict[str, list]:
-    grouped = data.groupby('Patient_ID')[text_column].apply(list).to_dict()
-    return grouped
+def preprocess_data(data: pd.DataFrame, text_column: str, chunk_size: int) -> Dict[str, List[str]]:
+    grouped_texts = data.groupby('Patient_ID')[text_column].apply(list).to_dict()
+    processed_texts = {}
 
-def feature_extraction(grouped_texts: Dict[str, list], encoder_type: str, encoder_params: dict, tokenizer_type: str, tokenizer_params: dict, device: str) -> Dict[str, torch.Tensor]:
+    for patient_id, texts in grouped_texts.items():
+        concatenated_chunks = []
+        for i in range(0, len(texts), chunk_size):
+            chunk = texts[i:i + chunk_size]
+            concatenated_chunks.append(''.join(chunk))
+        processed_texts[patient_id] = concatenated_chunks
+
+    return processed_texts
+
+def feature_extraction(grouped_texts: Dict[str, List[str]], encoder_type: str, encoder_params: dict, tokenizer_type: str, tokenizer_params: dict, device: str) -> Dict[str, torch.Tensor]:
     tokenizer = TokenizerFactory.create_tokenizer(tokenizer_type, **tokenizer_params)
-    encoder_strategy = EncoderFactory.create_encoder(encoder_type, device=device, **encoder_params)
-    model = encoder_strategy.create_model(**encoder_params).to(device)
+    encoder_strategy = EncoderFactory.create_encoder(encoder_type, **encoder_params)
+    model = encoder_strategy.create_model().to(device)
+    
     all_features = {}
     for patient_id, texts in grouped_texts.items():
-        inputs = tokenizer.tokenize(texts).to(device)
-        with torch.no_grad():
-            outputs = model(inputs)
-        features = encoder_strategy.extract_features(outputs)
-        all_features[patient_id] = features
+        features_list = []
+        for text in texts:
+            inputs = tokenizer.tokenize(text).to(device)
+            with torch.no_grad():
+                outputs = model(inputs.unsqueeze(0))  # 增加 batch 维度
+            features = encoder_strategy.extract_features(outputs)
+            features_list.append(features.cpu())
+        all_features[patient_id] = torch.cat(features_list, dim=0)
     return all_features
 
 def save_features(all_features: Dict[str, torch.Tensor], output_dir: str):
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
     for patient_id, features in all_features.items():
-        output_path = f"{output_dir}/{patient_id}_features.npy"
-        np.save(output_path, features.cpu().numpy())
+        output_path = os.path.join(output_dir, f"{patient_id}_features.pt")
+        torch.save(features, output_path)
