@@ -2,7 +2,7 @@ import click
 import yaml
 import logging.config
 from pathlib import Path
-from .feature_extraction.feature_nodes import load_data, preprocess_data, feature_extraction, save_features
+from .feature_extraction.feature_nodes import load_data, preprocess_data, feature_extraction
 from .feature_extraction.tokenizer_factory import TokenizerFactory
 from .feature_extraction.encoder_factory import EncoderFactory
 
@@ -51,6 +51,9 @@ def run_pipeline(encoder, tokenizer, chunk_size):
     logger.info(f"Using tokenizer: {tokenizer_type} with params: {tokenizer_params}")
     logger.info(f"Using sequence chunk size: {sequence_chunk_size}")
 
+    stack_feature = config.get("stack_feature", True)
+    logger.info(f"Stack feature: {stack_feature}")
+
     # Load data
     raw_data_path = config["raw_data"]["filepath"]
     columns = config["columns"]
@@ -67,14 +70,16 @@ def run_pipeline(encoder, tokenizer, chunk_size):
     # Feature extraction
     device = config["device"]
     logger.info(f"Extracting features using encoder {encoder_type} on device {device}")
-    extracted_features = feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device)
-    logger.info("Feature extraction completed successfully.")
+    output_dir = config["output_dir"]
+    #extracted_features = feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device)
+    feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device, stack_feature, output_dir)
+    logger.info("Feature extraction and saving completed successfully.")
 
     # Save features
-    output_dir = config["output_dir"]
+    '''output_dir = config["output_dir"]
     logger.info(f"Saving features to {output_dir}")
     save_features(extracted_features, output_dir)
-    logger.info("Features saved successfully.")
+    logger.info("Features saved successfully.")'''
 
 @cli.command()
 @click.argument("model_name")
