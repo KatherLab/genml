@@ -38,12 +38,21 @@ class DNABERT2BPE(TokenizationStrategy):
         encoded = self.tokenizer.encode(text, add_special_tokens=True, return_tensors='pt')
         return encoded.squeeze(0)  # Remove batch dimension
 
-class CharacterTokenizerStrategy(TokenizationStrategy):
+'''class CharacterTokenizerStrategy(TokenizationStrategy):
     def __init__(self, characters: List[str]):
         self.char_to_id = {char: idx + 1 for idx, char in enumerate(characters)}  # +1 to reserve 0 for padding
         self.id_to_char = {idx + 1: char for idx, char in enumerate(characters)}
 
     def tokenize(self, text: str) -> torch.Tensor:
         tokenized_text = [self.char_to_id.get(char, 0) for char in text]
-        return torch.tensor(tokenized_text, dtype=torch.long)
+        return torch.tensor(tokenized_text, dtype=torch.long)'''
+
+class CharacterTokenizerStrategy(TokenizationStrategy):
+    def __init__(self, characters=['A', 'C', 'G', 'T', 'N'], model_max_length=512, **kwargs):
+        self.tokenizer = CharacterTokenizer(characters=characters, model_max_length=model_max_length+2, padding=False, **kwargs)
+    
+    def tokenize(self, text: str) -> torch.Tensor:
+        """Tokenize text using a character-based tokenizer and return tensor of input IDs."""
+        encoded_input = self.tokenizer(text, add_special_tokens=False, return_tensors='pt')
+        return encoded_input['input_ids']
 

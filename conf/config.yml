@@ -13,6 +13,6 @@ encoder_name: "hyenadna"  # or "DNABERT2"
 
 tokenizer_type: "character_tokenizer"  # choose a suitable tokenizer based on model
 
-device: "cuda"  # cuda, or "cpu" if you don't have a GPU
+device: "cpu"  # cuda, or "cpu" if you don't have a GPU
 
 output_dir: "./data/04_feature"

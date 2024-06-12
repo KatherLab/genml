@@ -55,7 +55,7 @@ def run_pipeline(encoder, tokenizer, chunk_size):
     raw_data_path = config["raw_data"]["filepath"]
     columns = config["columns"]
     logger.info(f"Loading data from {raw_data_path} with columns {columns}")
-    data = load_data(raw_data_path, columns)
+    data = load_data(raw_data_path, columns, num_patients=2)
     logger.info("Data loaded successfully.")
 
     # Preprocess data
