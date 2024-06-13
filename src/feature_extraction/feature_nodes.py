@@ -7,8 +7,6 @@ from .encoder_factory import EncoderFactory
 from .tokenizer_factory import TokenizerFactory
 
 
-'''def load_data(file_path: str, columns: list) -> pd.DataFrame:
-    return pd.read_csv(file_path, usecols=columns)'''
 def load_data(file_path: str, columns: list, num_patients: int = None) -> pd.DataFrame:
     data = pd.read_csv(file_path, usecols=columns)
     if num_patients is not None:
@@ -28,33 +26,6 @@ def preprocess_data(data: pd.DataFrame, text_column: str, chunk_size: int) -> Di
 
     return processed_texts
 
-'''def feature_extraction(grouped_texts: Dict[str, List[str]], encoder_type: str, encoder_params: dict, tokenizer_type: str, tokenizer_params: dict, device: str) -> Dict[str, torch.Tensor]:
-    tokenizer = TokenizerFactory.create_tokenizer(tokenizer_type, **tokenizer_params)
-    encoder_strategy = EncoderFactory.create_encoder(encoder_type, device, **encoder_params)
-    model = encoder_strategy.create_model().to(device)
-  
-    all_features = {}
-    for patient_id, texts in grouped_texts.items():
-        features_list = []
-        for text in texts:
-            inputs = tokenizer.tokenize(text).to(device)
-            with torch.no_grad():
-                #outputs = model(inputs.unsqueeze(0))  # include a batch dimension
-                outputs = model(inputs)  # if inputs already include a batch dimension
-            features = encoder_strategy.extract_features(outputs)
-            features_list.append(features.cpu())
-            torch.cuda.empty_cache()  # clean GPU cache
-        all_features[patient_id] = torch.cat(features_list, dim=1)
-        torch.cuda.empty_cache()
-    return all_features
-
-def save_features(all_features: Dict[str, torch.Tensor], output_dir: str):
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-    
-    for patient_id, features in all_features.items():
-        output_path = os.path.join(output_dir, f"{patient_id}_features.pt")
-        torch.save(features, output_path)'''
 
 def save_feature_tensor(features: torch.Tensor, output_dir: str, file_name: str):
     output_path = os.path.join(output_dir, file_name)

@@ -14,6 +14,6 @@ class EncoderFactory:
         #return strategy_class(**kwargs)
         return strategy_class(device=device, **kwargs)
 
-    @staticmethod
+'''    @staticmethod
     def get_available_encoders() -> list:
-        return list(EncoderFactory._strategies.keys())
+        return list(EncoderFactory._strategies.keys())'''

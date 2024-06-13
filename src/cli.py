@@ -24,6 +24,13 @@ def load_params(file_path):
         params = yaml.safe_load(f)
     return params
 
+def load_mapping():
+    mapping_path = Path(__file__).parent.parent / "conf" / "feature_params" / "mapping.yml"
+    with open(mapping_path, "r") as f:
+        mapping = yaml.safe_load(f)
+    return mapping
+
+
 @click.group()
 def cli():
     pass
@@ -75,13 +82,7 @@ def run_pipeline(encoder, tokenizer, chunk_size):
     feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device, stack_feature, output_dir)
     logger.info("Feature extraction and saving completed successfully.")
 
-    # Save features
-    '''output_dir = config["output_dir"]
-    logger.info(f"Saving features to {output_dir}")
-    save_features(extracted_features, output_dir)
-    logger.info("Features saved successfully.")'''
-
-@cli.command()
+'''@cli.command()
 @click.argument("model_name")
 def get_tokenizers(model_name):
     """Get supported tokenizers for a given model name"""
@@ -95,7 +96,15 @@ def get_tokenizers(model_name):
 def list_encoders():
     """List available encoders"""
     encoders = EncoderFactory.get_available_encoders()
-    click.echo(f"Available encoders: {', '.join(encoders)}")
+    click.echo(f"Available encoders: {', '.join(encoders)}")'''
+
+@cli.command()
+def list_encoders():
+    """List available encoders and their corresponding tokenizers"""
+    mapping = load_mapping()
+    for encoder, tokenizers in mapping["encoder_tokenizer_mapping"].items():
+        click.echo(f"Encoder: {encoder}")
+        click.echo(f"  Tokenizers: {', '.join(tokenizers)}")
 
 
 if __name__ == "__main__":

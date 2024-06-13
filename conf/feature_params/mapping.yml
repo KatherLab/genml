@@ -1,0 +1,5 @@
+encoder_tokenizer_mapping:
+  hyenadna:
+    - character_tokenizer
+  dnabert2:
+    - dnabert2_bpe
