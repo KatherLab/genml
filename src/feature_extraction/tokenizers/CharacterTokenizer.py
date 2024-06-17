@@ -1,13 +1,16 @@
 #@title Tokenizer
 
-"""
-Just a simple character level tokenizer.
+'''
+@article{nguyen2023hyenadna,
+      title={HyenaDNA: Long-Range Genomic Sequence Modeling at Single Nucleotide Resolution}, 
+      author={Eric Nguyen and Michael Poli and Marjan Faizi and Armin Thomas and Callum Birch-Sykes and Michael Wornow and Aman Patel and Clayton Rabideau and Stefano Massaroli and Yoshua Bengio and Stefano Ermon and Stephen A. Baccus and Chris Ré},
+      year={2023},
+      eprint={2306.15794},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+'''
 
-From: https://github.com/dariush-bahrami/character-tokenizer/blob/master/charactertokenizer/core.py
-
-CharacterTokenzier for Hugging Face Transformers.
-This is heavily inspired from CanineTokenizer in transformers package.
-"""
 import json
 import os
 from pathlib import Path
