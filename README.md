@@ -32,18 +32,21 @@ GenML Pipeline is a genomic machine learning pipeline designed to preprocess gen
    pip install -r requirements.txt
 
 ## Usage
-Running the Pipeline
-Listing Available Encoders and Tokenizers
+
+1. **Listing Available Encoders and Tokenizers**
 To list all available encoders and their corresponding tokenizers:
    ```sh
    python -m src list-encoders
 
+2. **Running the Pipeline**
 To run the pipeline with the specified configurations:
    ```sh
    python -m src run-pipeline --encoder <encoder_name> --tokenizer <tokenizer_name> --chunk-size <chunk_size>
 Example:
    ```sh
    python -m src run-pipeline --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500
+
+
 
 ## Configuration
 ## Project Structure
