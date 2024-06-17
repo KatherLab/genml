@@ -2,7 +2,7 @@
 
 ## Overview
 
-GenML Pipeline is a genomic machine learning pipeline designed to preprocess genomic data, tokenize sequences, and extract features using different encoders and tokenizers. The pipeline supports multiple encoders and tokenizers, and can be configured to process data with custom parameters.
+GenML Pipeline is a genomic machine learning pipeline designed to preprocess genomic data, tokenize sequences, and extract features using pretrained foundation models. The pipeline supports multiple encoders and tokenizers, and can be configured to process data with custom parameters.
 
 ## Features
 
