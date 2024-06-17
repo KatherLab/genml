@@ -1,7 +1,7 @@
 import torch
 
 # 加载 .pt 文件
-feature_path = '/Users/lizhang/Documents/Genomics/genml/data/04_feature/TCGA-02-0003_1_features.pt'
+feature_path = '/Users/lizhang/Documents/Genomics/genml/data/04_feature/hyenadna_stack_False/TCGA-02-0003_0.pt'
 features = torch.load(feature_path)
 
 # 检查加载的特征内容
