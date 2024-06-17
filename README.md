@@ -38,31 +38,9 @@ To run the pipeline with the specified configurations:
 Example:
     python -m src run-pipeline --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500
 
+## Configuration
 ## Project Structure
-genml/
-├── conf/
-│   ├── config.yml
-│   ├── feature_params/
-│   │   ├── encoder.yml
-│   │   ├── tokenizer.yml
-│   │   ├── mapping.yml
-│   └── logging.yml
-├── data/
-│   ├── 01_raw/
-│   ├── 04_feature/
-│   └── 06_models/
-├── src/
-│   ├── __init__.py
-│   ├── __main__.py
-│   ├── cli.py
-│   ├── feature_extraction/
-│   │   ├── __init__.py
-│   │   ├── encoder_factory.py
-│   │   ├── encoder_strategy.py
-│   │   ├── feature_nodes.py
-│   │   ├── tokenizer_factory.py
-│   │   └── tokenizer_strategy.py
-└── requirements.txt
+
 
 
 
