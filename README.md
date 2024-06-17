@@ -47,10 +47,10 @@ To run the pipeline with the specified configurations:
    ```sh
    python -m src run-pipeline --encoder <encoder_name> --tokenizer <tokenizer_name> --chunk-size <chunk_size>
    ```
-Example:
-   ```sh
-   python -m src run-pipeline --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500
-   ```
+   Example:
+      ```sh
+      python -m src run-pipeline --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500
+      ```
 
 
 
