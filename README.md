@@ -28,18 +28,22 @@ GenML Pipeline is a genomic machine learning pipeline designed to preprocess gen
 
 3. **Install the required dependencies:**
 
-   `pip install -r requirements.txt`
+   ```sh
+   pip install -r requirements.txt
 
 ## Usage
 Running the Pipeline
 Listing Available Encoders and Tokenizers
 To list all available encoders and their corresponding tokenizers:
-   `python -m src list-encoders`
+   ```sh
+   python -m src list-encoders
 
 To run the pipeline with the specified configurations:
-   `python -m src run-pipeline --encoder <encoder_name> --tokenizer <tokenizer_name> --chunk-size <chunk_size>`
+   ```sh
+   python -m src run-pipeline --encoder <encoder_name> --tokenizer <tokenizer_name> --chunk-size <chunk_size>
 Example:
-   `python -m src run-pipeline --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500`
+   ```sh
+   python -m src run-pipeline --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500
 
 ## Configuration
 ## Project Structure
