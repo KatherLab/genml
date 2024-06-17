@@ -20,12 +20,14 @@ GenML Pipeline is a genomic machine learning pipeline designed to preprocess gen
    git clone <repository_url>
    cd genml
 
-2. Create and activate a virtual environment:
+2. **Create and activate a virtual environment:**
+    '''sh
     python -m venv .venv
     source .venv/bin/activate
 
-3. Install the required dependencies:
-    pip install -r requirements.txt
+
+3. **Install the required dependencies:**
+    'pip install -r requirements.txt'
 
 ## Usage
 Running the Pipeline
@@ -36,13 +38,9 @@ python -m src list-encoders
 '''
 
 To run the pipeline with the specified configurations:
-    '''
-    python -m src run-pipeline --encoder <encoder_name> --tokenizer <tokenizer_name> --chunk-size <chunk_size>
-    '''
+    'python -m src run-pipeline --encoder <encoder_name> --tokenizer <tokenizer_name> --chunk-size <chunk_size>'
 Example:
-    '''
-    python -m src run-pipeline --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500
-    '''
+'python -m src run-pipeline --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500'
 
 ## Configuration
 ## Project Structure
