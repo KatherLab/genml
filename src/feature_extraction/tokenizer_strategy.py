@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from transformers import AutoTokenizer
 from .tokenizers.CharacterTokenizer import CharacterTokenizer
 import torch
@@ -13,10 +12,6 @@ class DNABERT2BPE(TokenizationStrategy):
     def __init__(self, pretrained_model_name: str):
         self.tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name)
     
-    #def tokenize(self, text: str) -> torch.Tensor:
-     #   encoded = self.tokenizer.encode(text, add_special_tokens=True, return_tensors='pt')
-        # return encoded.squeeze(0)  # Remove batch dimension
-    #    return encoded['input_ids']  # Keep batch dimension
     def tokenize(self, text: str) -> torch.Tensor:
         encoded = self.tokenizer(text, add_special_tokens=True, return_tensors='pt')
         #print("Shape of encoded['input_ids']:", encoded['input_ids'].shape)
