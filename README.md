@@ -56,7 +56,10 @@ To run the pipeline with the specified configurations:
 
 ## Configuration
 ## Project Structure
+![image](https://gitlab.hrz.tu-chemnitz.de/lizh574c--tu-dresden.de/genml/-/blob/master/docs/DFD.png?ref_type=heads)
+
 ## Contributing
+
 (Create a new branch firstly.)
 1. **Including a new Tokenizer**  <br>
    a. Add a class NewTokenizerStrategy(TokenizationStrategy) in 'src/feature_extraction/tokenizer_strategy.py'  
