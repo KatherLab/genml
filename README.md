@@ -68,12 +68,13 @@ To run the pipeline with the specified configurations:
    b. Register the new Encoder to 'src/feature_extraction/encoder_factory.py'  
    c. Set up for the new Encoder in 'conf/feature_params/encoder.yml'  
 
-3. **After validate a pair of Tokenizer and Encoder**  <br>
+3. **After validating a pair of Tokenizer and Encoder**  <br>
    Add the mapping to conf/feature_params/mapping.yml
 
 ## TODO: 
-1. remove the register step for tokenizer and encoder  
-2. option to output cls token as embedding
+1. Remove the register step for tokenizer and encoder  
+2. Option to output cls token as embedding
+3. Dock container
 
 
 
