@@ -57,11 +57,25 @@ To run the pipeline with the specified configurations:
 ## Configuration
 ## Project Structure
 ## Contributing
-1. Fork the repository.  
-2. Create a new branch (`git checkout -b feature-branch`).  
-3. Commit your changes (`git commit -am 'Add new feature'`).  
-4. Push to the branch (`git push origin feature-branch`).  
-5. Create a new Pull Request.  
+(Create a new branch firstly.)
+1. **Including a new Tokenizer**  <br>
+a. Add a class NewTokenizerStrategy(TokenizationStrategy) in [text](src/feature_extraction/tokenizer_strategy.py) 
+b. Register the new Tokeniter to src/feature_extraction/tokenizer_factory.py 
+c. Set up for the new Tokenizer in conf/feature_params/tokenizer.yml 
+
+2. **Including a new Encoder**  <br>
+a. Add a class NewEncoderStrategy(EncoderStrategy) in [text](src/feature_extraction/encoder_strategy.py) 
+b. Register the new Encoder to src/feature_extraction/encoder_factory.py 
+c. Set up for the new Encoder in conf/feature_params/encoder.yml 
+
+3. **After validate a pair of Tokenizer and Encoder**  <br>
+Add the mapping to conf/feature_params/mapping.yml
+
+## TO-DO: 
+1. remove the register step for tokenizer and encoder 
+2. option to output cls token as embedding
+
+
 
 
 
