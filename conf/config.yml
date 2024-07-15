@@ -15,6 +15,8 @@ tokenizer_type: "character_tokenizer"  # choose a suitable tokenizer based on mo
 
 device: "cpu"  # cuda, or "cpu" if you don't have a GPU
 
+cls_token: False
+
 stack_feature: False  # Set to true to stack features for each patient
 
 output_dir: "./data/04_feature"

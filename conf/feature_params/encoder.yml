@@ -2,8 +2,8 @@ dnabert2:
   pretrained_model_name: "zhihan1996/DNABERT-2-117M"
 
 hyenadna:
-  pretrained_model_name: "hyenadna-small-32k-seqlen"
-  model_config_path: "./data/06_models/hyenadna_checkpoints"  # 配置文件路径
+  pretrained_model_name: "hyenadna-small-32k-seqlen" #"hyenadna-medium-450k-seqlen" #"hyenadna-medium-160k-seqlen" 
+  model_config_path: "./data/06_models/hyenadna_checkpoints"  
   download: False
 
   

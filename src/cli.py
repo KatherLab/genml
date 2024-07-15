@@ -3,8 +3,6 @@ import yaml
 import logging.config
 from pathlib import Path
 from .feature_extraction.feature_nodes import load_data, preprocess_data, feature_extraction
-from .feature_extraction.tokenizer_factory import TokenizerFactory
-from .feature_extraction.encoder_factory import EncoderFactory
 
 def setup_logging():
     config_path = Path(__file__).parent.parent / "conf" / "logging.yml"
@@ -77,27 +75,13 @@ def run_pipeline(encoder, tokenizer, chunk_size):
 
     # Feature extraction
     device = config["device"]
+    cls = config["cls_token"]
     logger.info(f"Extracting features using encoder {encoder_type} on device {device}")
     output_dir = config["output_dir"]
     #extracted_features = feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device)
-    feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device, stack_feature, output_dir)
+    feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device, cls, stack_feature, output_dir)
     logger.info("Feature extraction and saving completed successfully.")
 
-'''@cli.command()
-@click.argument("model_name")
-def get_tokenizers(model_name):
-    """Get supported tokenizers for a given model name"""
-    tokenizers = TokenizerFactory.get_available_tokenizers(model_name)
-    if tokenizers:
-        click.echo(f"Supported tokenizers for {model_name}: {', '.join(tokenizers)}")
-    else:
-        click.echo(f"No supported tokenizers found for {model_name}")
-
-@cli.command()
-def list_encoders():
-    """List available encoders"""
-    encoders = EncoderFactory.get_available_encoders()
-    click.echo(f"Available encoders: {', '.join(encoders)}")'''
 
 @cli.command()
 def list_encoders():

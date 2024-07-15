@@ -1,7 +1,7 @@
 import torch
 
 # 加载 .pt 文件
-feature_path = '/Users/lizhang/Documents/Genomics/genml/data/04_feature/hyenadna_stack_False/TCGA-02-0003_0.pt'
+feature_path = '/Users/lizhang/Documents/Genomics/genml/data/04_feature/hyenadna_stack_False/TCGA-02-0033_0.pt'
 features = torch.load(feature_path)
 
 # 检查加载的特征内容
@@ -20,4 +20,4 @@ else:
     print(f"Unknown data type: {type(features)}")
 
 # 示例：打印特定特征的数据
-print(features)  # 或者特定的 key: print(features['some_key'])
+#print(features)  # 或者特定的 key: print(features['some_key'])

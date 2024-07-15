@@ -9,8 +9,9 @@ class EncoderStrategy(ABC):
         pass
 
     @abstractmethod
-    def extract_features(self, outputs) -> torch.Tensor:
+    def extract_features(self, outputs, cls=False) -> torch.Tensor:
         pass
+
 
 class DNABERT2EncoderStrategy(EncoderStrategy):
     def __init__(self, pretrained_model_name: str, device: str = 'cpu'):
@@ -20,8 +21,12 @@ class DNABERT2EncoderStrategy(EncoderStrategy):
     def create_model(self, **kwargs) -> torch.nn.Module:
         return AutoModel.from_pretrained(self.pretrained_model_name, trust_remote_code=True)
 
-    def extract_features(self, outputs) -> torch.Tensor:
-        return outputs[0]
+    def extract_features(self, outputs, cls=False) -> torch.Tensor:
+        if cls:
+            return outputs[1] #cls_token as features
+        else:
+            return outputs[0]
+
 
 class HyenaDNAEncoderStrategy(EncoderStrategy):
     def __init__(self, pretrained_model_name: str, model_config_path: str, download: bool = False, device: str = 'cpu'):
@@ -49,5 +54,8 @@ class HyenaDNAEncoderStrategy(EncoderStrategy):
         else:
             raise ValueError(f"Unsupported pretrained model name: {self.pretrained_model_name}")
 
-    def extract_features(self, outputs) -> torch.Tensor:
-        return outputs
+    def extract_features(self, outputs, cls=False) -> torch.Tensor:
+        if cls:
+            return outputs[:, 0, :] #cls_token as features
+        else:
+            return outputs
