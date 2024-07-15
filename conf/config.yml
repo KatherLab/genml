@@ -1,13 +1,13 @@
 raw_data:
   filepath: "./data/01_raw/tcga_mutations_controlled.csv"
 
-columns:
-  - Patient_ID
-  - Alt_Sequence
+uni_column: "Patient_ID"
 
 text_column: "Alt_Sequence"
 
-sequence_chunk_size: 500  # 用户自定义的抽取数目
+num_patients: 2 # default None
+
+sequence_chunk_size: 500  # the num of sequences to be concatenated
 
 encoder_name: "hyenadna"  # or "DNABERT2"
 

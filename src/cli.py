@@ -63,15 +63,16 @@ def run_pipeline(encoder, tokenizer, chunk_size):
 
     # Load data
     raw_data_path = config["raw_data"]["filepath"]
-    columns = config["columns"]
-    logger.info(f"Loading data from {raw_data_path} with columns {columns}")
-    data = load_data(raw_data_path, columns, num_patients=2)
+    uni_column = config["uni_column"]
+    num_patients = config["num_patients"]
+    logger.info(f"Loading data from {raw_data_path}")
+    data = load_data(raw_data_path, uni_column, num_patients=num_patients)
     logger.info("Data loaded successfully.")
 
     # Preprocess data
     text_column = config["text_column"]
     logger.info(f"Preprocessing data with text column {text_column}")
-    grouped_texts = preprocess_data(data, text_column, sequence_chunk_size)
+    grouped_texts = preprocess_data(data, text_column, uni_column, sequence_chunk_size)
     logger.info("Data preprocessed successfully.")
 
     # Feature extraction

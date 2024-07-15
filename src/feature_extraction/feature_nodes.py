@@ -7,14 +7,14 @@ from .encoder_factory import EncoderFactory
 from .tokenizer_factory import TokenizerFactory
 
 
-def load_data(file_path: str, columns: list, num_patients: int = None) -> pd.DataFrame:
-    data = pd.read_csv(file_path, usecols=columns)
+def load_data(file_path: str, uni_column: str, num_patients: int = None) -> pd.DataFrame:
+    data = pd.read_csv(file_path)
     if num_patients is not None:
-        data = data[data['Patient_ID'].isin(data['Patient_ID'].unique()[:num_patients])]
+        data = data[data[uni_column].isin(data[uni_column].unique()[:num_patients])]
     return data
 
-def preprocess_data(data: pd.DataFrame, text_column: str, chunk_size: int) -> Dict[str, List[str]]:
-    grouped_texts = data.groupby('Patient_ID')[text_column].apply(list).to_dict()
+def preprocess_data(data: pd.DataFrame, text_column: str, uni_column: str, chunk_size: int) -> Dict[str, List[str]]:
+    grouped_texts = data.groupby(uni_column)[text_column].apply(list).to_dict()
     processed_texts = {}
 
     for patient_id, texts in grouped_texts.items():
@@ -46,7 +46,8 @@ def feature_extraction(grouped_texts: Dict[str, List[str]], encoder_type: str, e
         for idx, text in enumerate(texts):
             inputs = tokenizer.tokenize(text).to(device)
             with torch.no_grad():
-                outputs = model(inputs) # if inputs already include a batch dimension
+                #outputs = model(inputs) # if inputs already include a batch dimension
+                outputs = model(inputs)[:, 0, :] # cls token
             features = encoder_strategy.extract_features(outputs)
             features_list.append(features.cpu())
             torch.cuda.empty_cache()  # clean GPU cache
