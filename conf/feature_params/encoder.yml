@@ -6,4 +6,3 @@ hyenadna:
   model_config_path: "./data/06_models/hyenadna_checkpoints"  
   download: False
 
-  

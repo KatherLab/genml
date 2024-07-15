@@ -74,10 +74,11 @@ To run the pipeline with the specified configurations:
 3. **After validating a pair of Tokenizer and Encoder**  <br>
    Add the mapping to conf/feature_params/mapping.yml
 
-## TODO: 
-1. Remove the register step for tokenizer and encoder  
-2. Option to output cls token as embedding
-3. Dock container
+## To-Do List  
+- [ ] Remove the register step for tokenizer and encoder  
+- [x] Option to output cls token as embedding  
+- [ ] Dock container  
+- [ ] Include Enformer and nucleotide transformer  
 
 
 
