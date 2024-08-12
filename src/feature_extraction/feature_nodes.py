@@ -15,17 +15,24 @@ def load_data(file_path: str, uni_column: str, num_patients: int = None) -> pd.D
 
 
 def preprocess_data(data: pd.DataFrame, text_column: str, uni_column: str, chunk_size: int, sep_token: str = '[SEP]') -> Dict[str, List[str]]:
+    ''''
+    chunk_size: the num(not length) of alt_sequences in one chunk.
+    a chunk is a list of alt_sequences.
+    '''
     grouped_texts = data.groupby(uni_column)[text_column].apply(list).to_dict()
     processed_texts = {}
 
     for patient_id, texts in grouped_texts.items():
-        concatenated_chunks = []
-        for i in range(0, len(texts), chunk_size):
+        #print('len(texts)', patient_id+'_' +str(len(texts))) # e.g 789 alt_sequences
+        concatenated_chunks = [] # list to store chunks per patient
+        for i in range(0, len(texts), chunk_size): 
             chunk = texts[i:i + chunk_size]
-            concatenated_chunk = ''.join(chunk) + sep_token  # Add sep_token at the end of each chunk
+            chunk = [text + sep_token for text in chunk] # Add sep_token at the end of each text within a chunk
+            concatenated_chunk = ''.join(chunk) 
             concatenated_chunks.append(concatenated_chunk)
         processed_texts[patient_id] = concatenated_chunks
-
+        #print('concatenated_chunks', patient_id+'_' +str(len(concatenated_chunks))) #2 chunks
+        #print('concatenated_chunks', concatenated_chunks)
     return processed_texts
 
 
@@ -47,6 +54,7 @@ def feature_extraction(
     tokenizer = TokenizerFactory.create_tokenizer(tokenizer_type, **tokenizer_params)
     encoder_strategy = EncoderFactory.create_encoder(encoder_type, device, **encoder_params)
     model = encoder_strategy.create_model().to(device)
+  
 
     # Create the dynamic output directory path
     dynamic_output_dir = os.path.join(output_dir, f"{encoder_type}_stack_{stack_feature}")
@@ -56,6 +64,7 @@ def feature_extraction(
     for patient_id, texts in grouped_texts.items():
         features_list = []
         for idx, text in enumerate(texts):
+            print('text length:', len(text))
             inputs = tokenizer.tokenize(text).to(device)
             with torch.no_grad():
                 outputs = model(inputs) # if inputs already include a batch dimension
