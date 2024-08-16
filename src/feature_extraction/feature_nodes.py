@@ -17,7 +17,9 @@ def load_data(file_path: str, uni_column: str, num_patients: int = None) -> pd.D
 def preprocess_data(data: pd.DataFrame, text_column: str, uni_column: str, chunk_size: int, sep_token: str = '[SEP]') -> Dict[str, List[str]]:
     ''''
     chunk_size: the num(not length) of alt_sequences in one chunk.
-    a chunk is a list of alt_sequences.
+    chunk: a list of alt_sequences/texts with length of chunk_size under one patient.
+    concatenated_chunk: concatenated alt_sequences with sep_token for one chunk.
+    concatenated_chunks: a list of 'concatenated_chunk's of one patient
     '''
     grouped_texts = data.groupby(uni_column)[text_column].apply(list).to_dict()
     processed_texts = {}
@@ -29,10 +31,11 @@ def preprocess_data(data: pd.DataFrame, text_column: str, uni_column: str, chunk
             chunk = texts[i:i + chunk_size]
             chunk = [text + sep_token for text in chunk] # Add sep_token at the end of each text within a chunk
             concatenated_chunk = ''.join(chunk) 
+            print('concatenated_chunk', concatenated_chunk)
             concatenated_chunks.append(concatenated_chunk)
         processed_texts[patient_id] = concatenated_chunks
         #print('concatenated_chunks', patient_id+'_' +str(len(concatenated_chunks))) #2 chunks
-        #print('concatenated_chunks', concatenated_chunks)
+        print('concatenated_chunks', concatenated_chunks)
     return processed_texts
 
 
