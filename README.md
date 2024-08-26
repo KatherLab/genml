@@ -79,6 +79,7 @@ To run the pipeline with the specified configurations:
    Add the mapping to conf/feature_params/mapping.yml
 
 ## To-Do List  
+- [ ] Skip feature extraction when .h5 is existing  
 - [ ] Remove the register step for tokenizer and encoder  
 - [x] Option to output cls token as embedding  
 - [ ] Dock container  
