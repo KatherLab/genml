@@ -1,22 +1,22 @@
 raw_data:
-  filepath: "./data/01_raw/tcga_mutations_controlled.csv"
+  filepath: /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv
 
 uni_column: "Patient_ID"
 
 text_column: "Alt_Sequence"
 
-num_patients: 2 # default None
+num_patients: #2 # default None
 
 sequence_chunk_size: 500  # the num of sequences to be concatenated
 
-encoder_name: "hyenadna"  # or "DNABERT2"
+encoder_name: "DNABERT2" # "hyenadna"  # or "DNABERT2"
 
-tokenizer_type: "character_tokenizer"  # choose a suitable tokenizer based on model
+tokenizer_type: "dnabert2_bpe" # "character_tokenizer"  # choose a suitable tokenizer based on model
 
-device: "cpu"  # cuda, or "cpu" if you don't have a GPU
+device: "cuda"  # cuda, or "cpu" if you don't have a GPU
 
 cls_token: False
 
-stack_feature: False  # Set to true to stack features for each patient
+stack_feature: True  # Set to true to stack features for each patient
 
-output_dir: "./data/04_feature"
+output_dir: /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/04_feature

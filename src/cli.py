@@ -61,6 +61,7 @@ def run_pipeline(encoder, tokenizer, chunk_size):
 
     # Load data
     raw_data_path = config["raw_data"]["filepath"]
+    raw_data_path = Path(raw_data_path)
     uni_column = config["uni_column"]
     num_patients = config["num_patients"]
     logger.info(f"Loading data from {raw_data_path}")
@@ -78,6 +79,7 @@ def run_pipeline(encoder, tokenizer, chunk_size):
     cls = config["cls_token"]
     logger.info(f"Extracting features using encoder {encoder_type} on device {device}")
     output_dir = config["output_dir"]
+    output_dir = Path(output_dir)
     #extracted_features = feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device)
     feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device, cls, stack_feature, output_dir)
     logger.info("Feature extraction and saving completed successfully.")
