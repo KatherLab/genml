@@ -3,6 +3,6 @@ dnabert2:
 
 hyenadna:
   pretrained_model_name: "hyenadna-small-32k-seqlen" #"hyenadna-medium-450k-seqlen" #"hyenadna-medium-160k-seqlen" 
-  model_config_path: "./data/06_models/hyenadna_checkpoints"  
+  model_config_path: /Users/lizhang/Documents/Genomics/genml/data/06_models/hyenadna_checkpoints  
   download: False
 

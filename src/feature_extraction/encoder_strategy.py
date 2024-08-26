@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import torch
+from pathlib import Path
 from transformers import AutoModel
 from ..models.hyenadna import HyenaDNAPreTrainedModel
 
@@ -32,6 +33,7 @@ class HyenaDNAEncoderStrategy(EncoderStrategy):
     def __init__(self, pretrained_model_name: str, model_config_path: str, download: bool = False, device: str = 'cpu'):
         self.pretrained_model_name = pretrained_model_name
         self.model_config_path = model_config_path
+        self.model_config_path = Path(self.model_config_path)
         self.download = download
         self.device = device
 
