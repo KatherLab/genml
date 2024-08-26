@@ -31,11 +31,11 @@ def preprocess_data(data: pd.DataFrame, text_column: str, uni_column: str, chunk
             chunk = texts[i:i + chunk_size]
             chunk = [text + sep_token for text in chunk] # Add sep_token at the end of each text within a chunk
             concatenated_chunk = ''.join(chunk) 
-            print('concatenated_chunk', concatenated_chunk)
+            #print('concatenated_chunk', concatenated_chunk)
             concatenated_chunks.append(concatenated_chunk)
         processed_texts[patient_id] = concatenated_chunks
         #print('concatenated_chunks', patient_id+'_' +str(len(concatenated_chunks))) #2 chunks
-        print('concatenated_chunks', concatenated_chunks)
+        #print('concatenated_chunks', concatenated_chunks)
     return processed_texts
 
 
@@ -60,14 +60,14 @@ def feature_extraction(
   
 
     # Create the dynamic output directory path
-    dynamic_output_dir = os.path.join(output_dir, f"{encoder_type}_stack_{stack_feature}")
+    dynamic_output_dir = os.path.join(output_dir, f"{encoder_type}_stack_{stack_feature}_cls_{cls}")
     if not os.path.exists(dynamic_output_dir):
         os.makedirs(dynamic_output_dir)
     
     for patient_id, texts in grouped_texts.items():
         features_list = []
         for idx, text in enumerate(texts):
-            print('text length:', len(text))
+            #print('text length:', len(text))
             inputs = tokenizer.tokenize(text).to(device)
             with torch.no_grad():
                 outputs = model(inputs) # if inputs already include a batch dimension
