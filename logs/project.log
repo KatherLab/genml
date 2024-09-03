@@ -34,3 +34,322 @@
 2024-08-26 15:11:36,695 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/bert_layers.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
 2024-08-26 15:11:36,831 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/bert_padding.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
 2024-08-26 15:11:36,961 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/flash_attn_triton.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:15:46,776 - src.cli - INFO - Config loaded: {'raw_data': {'filepath': '/mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv'}, 'uni_column': 'Patient_ID', 'text_column': 'Alt_Sequence', 'num_patients': None, 'sequence_chunk_size': 500, 'encoder_name': 'dnabert2', 'tokenizer_type': 'dnabert2_bpe', 'device': 'cuda', 'cls_token': False, 'stack_feature': True, 'output_dir': '/mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/04_feature'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:46]
+2024-09-03 14:15:46,785 - src.cli - INFO - Using encoder: dnabert2 with params: {'pretrained_model_name': 'zhihan1996/DNABERT-2-117M'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:55]
+2024-09-03 14:15:46,786 - src.cli - INFO - Using tokenizer: dnabert2_bpe with params: {'pretrained_model_name': 'zhihan1996/DNABERT-2-117M'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:56]
+2024-09-03 14:15:46,786 - src.cli - INFO - Using sequence chunk size: 500 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:57]
+2024-09-03 14:15:46,786 - src.cli - INFO - Stack feature: True [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:60]
+2024-09-03 14:15:46,786 - src.cli - INFO - Loading data from /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:67]
+2024-09-03 14:18:03,698 - src.cli - INFO - Data loaded successfully. [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:69]
+2024-09-03 14:18:03,699 - src.cli - INFO - Preprocessing data with text column Alt_Sequence [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:73]
+2024-09-03 14:18:08,314 - src.cli - INFO - Data preprocessed successfully for 10035 patients. [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:75]
+2024-09-03 14:18:08,314 - src.cli - INFO - Extracting features using encoder dnabert2 on device cuda [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:80]
+2024-09-03 14:18:08,595 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:1051]
+2024-09-03 14:18:08,968 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/tokenizer_config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:18:09,402 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:18:09,733 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/configuration_bert.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:18:10,099 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:18:10,228 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/bert_layers.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:18:10,380 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/flash_attn_triton.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:18:10,527 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/bert_padding.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:25:49,184 - src.cli - INFO - Config loaded: {'raw_data': {'filepath': '/mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv'}, 'uni_column': 'Patient_ID', 'text_column': 'Alt_Sequence', 'num_patients': None, 'sequence_chunk_size': 500, 'encoder_name': 'dnabert2', 'tokenizer_type': 'dnabert2_bpe', 'device': 'cuda', 'cls_token': False, 'stack_feature': True, 'output_dir': '/mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/04_feature'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:46]
+2024-09-03 14:25:49,193 - src.cli - INFO - Using encoder: dnabert2 with params: {'pretrained_model_name': 'zhihan1996/DNABERT-2-117M'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:55]
+2024-09-03 14:25:49,193 - src.cli - INFO - Using tokenizer: dnabert2_bpe with params: {'pretrained_model_name': 'zhihan1996/DNABERT-2-117M'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:56]
+2024-09-03 14:25:49,193 - src.cli - INFO - Using sequence chunk size: 500 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:57]
+2024-09-03 14:25:49,193 - src.cli - INFO - Stack feature: True [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:60]
+2024-09-03 14:25:49,193 - src.cli - INFO - Loading data from /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:67]
+2024-09-03 14:26:43,894 - src.cli - INFO - Config loaded: {'raw_data': {'filepath': '/mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv'}, 'uni_column': 'Patient_ID', 'text_column': 'Alt_Sequence', 'num_patients': None, 'sequence_chunk_size': 500, 'encoder_name': 'dnabert2', 'tokenizer_type': 'dnabert2_bpe', 'device': 'cuda', 'cls_token': False, 'stack_feature': True, 'output_dir': '/mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/04_feature'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:46]
+2024-09-03 14:26:43,896 - src.cli - INFO - Using encoder: dnabert2 with params: {'pretrained_model_name': 'zhihan1996/DNABERT-2-117M'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:55]
+2024-09-03 14:26:43,897 - src.cli - INFO - Using tokenizer: dnabert2_bpe with params: {'pretrained_model_name': 'zhihan1996/DNABERT-2-117M'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:56]
+2024-09-03 14:26:43,897 - src.cli - INFO - Using sequence chunk size: 500 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:57]
+2024-09-03 14:26:43,897 - src.cli - INFO - Stack feature: True [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:60]
+2024-09-03 14:26:43,897 - src.cli - INFO - Loading data from /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:67]
+2024-09-03 14:29:01,989 - src.cli - INFO - Data loaded successfully. [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:69]
+2024-09-03 14:29:01,990 - src.cli - INFO - Preprocessing data with text column Alt_Sequence [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:73]
+2024-09-03 14:29:06,268 - src.cli - INFO - Data preprocessed successfully for 10035 patients. [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:75]
+2024-09-03 14:29:06,268 - src.cli - INFO - Extracting features using encoder dnabert2 on device cuda [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:80]
+2024-09-03 14:29:06,401 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:1051]
+2024-09-03 14:29:06,551 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/tokenizer_config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:29:06,803 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:29:06,939 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/configuration_bert.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:29:07,105 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:29:07,240 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/bert_layers.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:29:07,813 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/bert_padding.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:29:07,945 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/flash_attn_triton.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:42:59,440 - src.cli - INFO - Config loaded: {'raw_data': {'filepath': '/mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv'}, 'uni_column': 'Patient_ID', 'text_column': 'Alt_Sequence', 'num_patients': None, 'sequence_chunk_size': 500, 'encoder_name': 'dnabert2', 'tokenizer_type': 'dnabert2_bpe', 'device': 'cuda', 'cls_token': False, 'stack_feature': True, 'output_dir': '/mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/04_feature'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:46]
+2024-09-03 14:42:59,448 - src.cli - INFO - Using encoder: dnabert2 with params: {'pretrained_model_name': 'zhihan1996/DNABERT-2-117M'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:55]
+2024-09-03 14:42:59,448 - src.cli - INFO - Using tokenizer: dnabert2_bpe with params: {'pretrained_model_name': 'zhihan1996/DNABERT-2-117M'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:56]
+2024-09-03 14:42:59,448 - src.cli - INFO - Using sequence chunk size: 500 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:57]
+2024-09-03 14:42:59,449 - src.cli - INFO - Stack feature: True [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:60]
+2024-09-03 14:42:59,449 - src.cli - INFO - Loading data from /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:67]
+2024-09-03 14:44:55,667 - src.cli - INFO - Data loaded successfully. [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:69]
+2024-09-03 14:44:55,669 - src.cli - INFO - Preprocessing data with text column Alt_Sequence [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:73]
+2024-09-03 14:45:00,517 - src.cli - INFO - Data preprocessed successfully for 10035 patients. [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:75]
+2024-09-03 14:45:00,517 - src.cli - INFO - Extracting features using encoder dnabert2 on device cuda [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:80]
+2024-09-03 14:45:00,665 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:1051]
+2024-09-03 14:45:01,037 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/tokenizer_config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:45:01,394 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:45:01,729 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/configuration_bert.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:45:01,906 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:45:02,052 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/bert_layers.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:45:02,191 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/bert_padding.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:45:02,391 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/flash_attn_triton.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 14:45:05,501 - root - INFO - Feature extracting started at: 2024-09-03 14:45:05 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:83]
+2024-09-03 14:45:05,501 - root - INFO - Model: dnabert2
+ [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:84]
+2024-09-03 14:45:05,501 - root - INFO - Scanning for existing feature ... [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:89]
+2024-09-03 14:45:05,850 - root - INFO - Skipping 0 already processed patients out of 10035 total patients... [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:104]
+2024-09-03 14:45:05,861 - root - INFO - 
+
+===== Processing patient TCGA-BP-5177 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:10,395 - root - INFO - 
+
+===== Processing patient TCGA-BP-5178 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:12,739 - root - INFO - 
+
+===== Processing patient TCGA-BP-5180 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:14,885 - root - INFO - 
+
+===== Processing patient TCGA-BP-5182 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:17,398 - root - INFO - 
+
+===== Processing patient TCGA-BP-5183 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:19,371 - root - INFO - 
+
+===== Processing patient TCGA-BP-5184 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:21,500 - root - INFO - 
+
+===== Processing patient TCGA-BP-5185 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:23,670 - root - INFO - 
+
+===== Processing patient TCGA-BP-5186 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:25,866 - root - INFO - 
+
+===== Processing patient TCGA-BP-5187 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:28,124 - root - INFO - 
+
+===== Processing patient TCGA-BP-5189 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:30,313 - root - INFO - 
+
+===== Processing patient TCGA-BP-5190 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:32,353 - root - INFO - 
+
+===== Processing patient TCGA-BP-5191 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:34,378 - root - INFO - 
+
+===== Processing patient TCGA-BP-5192 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:36,550 - root - INFO - 
+
+===== Processing patient TCGA-BP-5194 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:38,468 - root - INFO - 
+
+===== Processing patient TCGA-BP-5195 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:40,770 - root - INFO - 
+
+===== Processing patient TCGA-BP-5196 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:42,958 - root - INFO - 
+
+===== Processing patient TCGA-BP-5198 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:45,323 - root - INFO - 
+
+===== Processing patient TCGA-BP-5200 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:47,406 - root - INFO - 
+
+===== Processing patient TCGA-BP-5201 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:49,376 - root - INFO - 
+
+===== Processing patient TCGA-BP-5202 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:51,683 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5875 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:53,793 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5876 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:56,122 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5877 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:45:58,324 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5878 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:00,552 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5879 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:02,217 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5880 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:04,003 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5881 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:05,882 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5882 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:07,795 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5883 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:09,661 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5884 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:11,432 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5885 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:13,599 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5886 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:15,552 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5887 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:16,675 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5888 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:18,125 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5889 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:19,977 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5890 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:22,181 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5891 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:24,017 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5892 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:25,817 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5893 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:27,502 - root - INFO - 
+
+===== Processing patient TCGA-BQ-5894 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:28,990 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7044 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:31,135 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7045 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:33,243 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7046 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:35,099 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7048 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:37,076 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7050 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:38,478 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7051 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:40,496 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7053 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:42,507 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7055 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:43,785 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7058 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:45,541 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7059 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:47,846 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7060 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:49,777 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7061 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:51,716 - root - INFO - 
+
+===== Processing patient TCGA-BQ-7062 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:46:53,564 - root - INFO - 
+
+===== Processing patient TCGA-BR-4183 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:47:00,298 - root - INFO - 
+
+===== Processing patient TCGA-BR-4184 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:47:54,765 - root - INFO - 
+
+===== Processing patient TCGA-BR-4187 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:48:01,892 - root - INFO - 
+
+===== Processing patient TCGA-BR-4188 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:48:07,408 - root - INFO - 
+
+===== Processing patient TCGA-BR-4191 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 14:48:14,064 - root - INFO - 
+
+===== Processing patient TCGA-BR-4201 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:00:41,898 - src.cli - INFO - Config loaded: {'raw_data': {'filepath': '/mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv'}, 'uni_column': 'Patient_ID', 'text_column': 'Alt_Sequence', 'num_patients': None, 'sequence_chunk_size': 500, 'encoder_name': 'dnabert2', 'tokenizer_type': 'dnabert2_bpe', 'device': 'cuda', 'cls_token': False, 'stack_feature': True, 'output_dir': '/mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/04_feature'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:46]
+2024-09-03 17:00:41,904 - src.cli - INFO - Using encoder: dnabert2 with params: {'pretrained_model_name': 'zhihan1996/DNABERT-2-117M'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:55]
+2024-09-03 17:00:41,904 - src.cli - INFO - Using tokenizer: dnabert2_bpe with params: {'pretrained_model_name': 'zhihan1996/DNABERT-2-117M'} [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:56]
+2024-09-03 17:00:41,904 - src.cli - INFO - Using sequence chunk size: 500 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:57]
+2024-09-03 17:00:41,904 - src.cli - INFO - Stack feature: True [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:60]
+2024-09-03 17:00:41,905 - src.cli - INFO - Loading data from /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:67]
+2024-09-03 17:02:32,431 - src.cli - INFO - Data loaded successfully. [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:69]
+2024-09-03 17:02:32,433 - src.cli - INFO - Preprocessing data with text column Alt_Sequence [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:73]
+2024-09-03 17:02:36,738 - src.cli - INFO - Data preprocessed successfully for 10035 patients. [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:75]
+2024-09-03 17:02:36,738 - src.cli - INFO - Extracting features using encoder dnabert2 on device cuda [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/cli.py:80]
+2024-09-03 17:02:36,988 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:1051]
+2024-09-03 17:02:37,387 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/tokenizer_config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 17:02:38,022 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 17:02:38,422 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/configuration_bert.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 17:02:38,811 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/config.json HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 17:02:39,142 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/bert_layers.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 17:02:39,530 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/flash_attn_triton.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 17:02:39,716 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /zhihan1996/DNABERT-2-117M/resolve/main/bert_padding.py HTTP/11" 200 0 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:546]
+2024-09-03 17:02:45,693 - root - INFO - Feature extracting started at: 2024-09-03 17:02:45 [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:83]
+2024-09-03 17:02:45,693 - root - INFO - Model: dnabert2
+ [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:84]
+2024-09-03 17:02:45,693 - root - INFO - Scanning for existing feature ... [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:89]
+2024-09-03 17:02:46,066 - root - INFO - Skipping 3840 already processed patients out of 10035 total patients... [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:104]
+2024-09-03 17:02:46,075 - root - INFO - 
+
+===== Processing patient TCGA-BR-4255 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:02:59,600 - root - INFO - 
+
+===== Processing patient TCGA-BR-4256 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:03:36,336 - root - INFO - 
+
+===== Processing patient TCGA-BR-4257 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:04:12,037 - root - INFO - 
+
+===== Processing patient TCGA-BR-4267 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:04:24,080 - root - INFO - 
+
+===== Processing patient TCGA-BR-4279 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:04:35,360 - root - INFO - 
+
+===== Processing patient TCGA-BR-4280 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:05:13,045 - root - INFO - 
+
+===== Processing patient TCGA-BR-4292 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:06:05,977 - root - INFO - 
+
+===== Processing patient TCGA-BR-4294 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:06:13,190 - root - INFO - 
+
+===== Processing patient TCGA-BR-4357 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:06:20,381 - root - INFO - 
+
+===== Processing patient TCGA-BR-4361 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:07:25,239 - root - INFO - 
+
+===== Processing patient TCGA-BR-4362 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:08:11,729 - root - INFO - 
+
+===== Processing patient TCGA-BR-4363 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:08:34,139 - root - INFO - 
+
+===== Processing patient TCGA-BR-4366 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:08:40,459 - root - INFO - 
+
+===== Processing patient TCGA-BR-4368 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:09:18,888 - root - INFO - 
+
+===== Processing patient TCGA-BR-4369 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:09:25,192 - root - INFO - 
+
+===== Processing patient TCGA-BR-4370 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:10:01,707 - root - INFO - 
+
+===== Processing patient TCGA-BR-4371 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]
+2024-09-03 17:10:05,540 - root - INFO - 
+
+===== Processing patient TCGA-BR-6452 ===== [in /mnt/bulk-io/lizhang/LiWorkSpace/genomics/repos/genml/src/feature_extraction/node_extract.py:107]

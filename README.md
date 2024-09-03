@@ -49,11 +49,11 @@ To list all available encoders and their corresponding tokenizers:
 2. **Running the Pipeline** <br>
 To run the pipeline with the specified configurations:
    ```sh
-   python -m src run-pipeline --encoder <encoder_name> --tokenizer <tokenizer_name> --chunk-size <chunk_size>
+   python -m src extract-feature --encoder <encoder_name> --tokenizer <tokenizer_name> --chunk-size <chunk_size>
    ```
    Example:
       ```sh
-      python -m src run-pipeline --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500
+      python -m src extract-feature --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500
       ```
 
 
@@ -79,7 +79,7 @@ To run the pipeline with the specified configurations:
    Add the mapping to conf/feature_params/mapping.yml
 
 ## To-Do List  
-- [ ] Skip feature extraction when .h5 is existing  
+- [x] Skip feature extraction when feature file is existing  
 - [ ] Remove the register step for tokenizer and encoder  
 - [x] Option to output cls token as embedding  
 - [ ] Dock container  

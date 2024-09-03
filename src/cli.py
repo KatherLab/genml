@@ -2,7 +2,7 @@ import click
 import yaml
 import logging.config
 from pathlib import Path
-from .feature_extraction.feature_nodes import load_data, preprocess_data, feature_extraction
+from .feature_extraction.node_extract import load_data, preprocess_data, feature_extraction
 
 def setup_logging():
     config_path = Path(__file__).parent.parent / "conf" / "logging.yml"
@@ -37,7 +37,7 @@ def cli():
 @click.option('--encoder', default=None, help='Specify encoder type (e.g., hyenadna, dnabert2)')
 @click.option('--tokenizer', default=None, help='Specify tokenizer type (e.g., character_tokenizer, dnabert2_bpe)')
 @click.option('--chunk-size', default=None, type=int, help='Specify the chunk size for concatenating sequences')
-def run_pipeline(encoder, tokenizer, chunk_size):
+def extract_feature(encoder, tokenizer, chunk_size):
     """Run the main pipeline"""
     setup_logging()
     logger = logging.getLogger(__name__)
@@ -71,8 +71,8 @@ def run_pipeline(encoder, tokenizer, chunk_size):
     # Preprocess data
     text_column = config["text_column"]
     logger.info(f"Preprocessing data with text column {text_column}")
-    grouped_texts = preprocess_data(data, text_column, uni_column, sequence_chunk_size)
-    logger.info("Data preprocessed successfully.")
+    grouped_chunks = preprocess_data(data, text_column, uni_column, sequence_chunk_size)
+    logger.info(f"Data preprocessed successfully for {len(grouped_chunks)} patients.")
 
     # Feature extraction
     device = config["device"]
@@ -80,8 +80,8 @@ def run_pipeline(encoder, tokenizer, chunk_size):
     logger.info(f"Extracting features using encoder {encoder_type} on device {device}")
     output_dir = config["output_dir"]
     output_dir = Path(output_dir)
-    #extracted_features = feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device)
-    feature_extraction(grouped_texts, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device, cls, stack_feature, output_dir)
+    #extracted_features = feature_extraction(grouped_chunks, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device)
+    feature_extraction(grouped_chunks, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device, cls, stack_feature, output_dir)
     logger.info("Feature extraction and saving completed successfully.")
 
 

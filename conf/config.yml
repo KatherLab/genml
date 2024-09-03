@@ -9,7 +9,7 @@ num_patients: #2 # default None
 
 sequence_chunk_size: 500  # the num of sequences to be concatenated
 
-encoder_name: "DNABERT2" # "hyenadna"  # or "DNABERT2"
+encoder_name: "dnabert2" # "hyenadna"  # or "DNABERT2"
 
 tokenizer_type: "dnabert2_bpe" # "character_tokenizer"  # choose a suitable tokenizer based on model
 
