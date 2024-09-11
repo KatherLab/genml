@@ -1,5 +1,5 @@
 from transformers import AutoTokenizer
-from .tokenizers.CharacterTokenizer import CharacterTokenizer
+from ..tokenizers.CharacterTokenizer import CharacterTokenizer
 import torch
 from typing import List
 

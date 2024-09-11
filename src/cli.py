@@ -2,7 +2,7 @@ import click
 import yaml
 import logging.config
 from pathlib import Path
-from .feature_extraction.node_extract import load_data, preprocess_data, feature_extraction
+from .feature_extraction.node_extract import feature_extraction
 
 def setup_logging():
     config_path = Path(__file__).parent.parent / "conf" / "logging.yml"
@@ -47,41 +47,46 @@ def extract_feature(encoder, tokenizer, chunk_size):
 
     encoder_type = encoder if encoder else config["encoder_name"]
     tokenizer_type = tokenizer if tokenizer else config["tokenizer_type"]
-    sequence_chunk_size = chunk_size if chunk_size else config.get("sequence_chunk_size", 10)
-
     encoder_params = load_params("conf/feature_params/encoder.yml")[encoder_type]
     tokenizer_params = load_params("conf/feature_params/tokenizer.yml")[tokenizer_type]
 
+    chunk_size = chunk_size if chunk_size else config.get("chunk_size", 10)
+
     logger.info(f"Using encoder: {encoder_type} with params: {encoder_params}")
     logger.info(f"Using tokenizer: {tokenizer_type} with params: {tokenizer_params}")
-    logger.info(f"Using sequence chunk size: {sequence_chunk_size}")
+    logger.info(f"Using sequence chunk size: {chunk_size}")
 
     stack_feature = config.get("stack_feature", True)
     logger.info(f"Stack feature: {stack_feature}")
 
-    # Load data
-    raw_data_path = config["raw_data"]["filepath"]
+    raw_data_path = config["filepath"]
     raw_data_path = Path(raw_data_path)
     uni_column = config["uni_column"]
-    num_patients = config["num_patients"]
-    logger.info(f"Loading data from {raw_data_path}")
-    data = load_data(raw_data_path, uni_column, num_patients=num_patients)
-    logger.info("Data loaded successfully.")
-
-    # Preprocess data
     text_column = config["text_column"]
-    logger.info(f"Preprocessing data with text column {text_column}")
-    grouped_chunks = preprocess_data(data, text_column, uni_column, sequence_chunk_size)
-    logger.info(f"Data preprocessed successfully for {len(grouped_chunks)} patients.")
+    num_patients = config["num_patients"]
+    batch_size = config["batch_size"]
 
-    # Feature extraction
     device = config["device"]
     cls = config["cls_token"]
-    logger.info(f"Extracting features using encoder {encoder_type} on device {device}")
+
     output_dir = config["output_dir"]
     output_dir = Path(output_dir)
-    #extracted_features = feature_extraction(grouped_chunks, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device)
-    feature_extraction(grouped_chunks, encoder_type, encoder_params, tokenizer_type, tokenizer_params, device, cls, stack_feature, output_dir)
+
+    logger.info("Start feature extraction.")
+    feature_extraction(file_path=raw_data_path, 
+                       text_column=text_column, 
+                       uni_column=uni_column, 
+                       chunk_size=chunk_size, 
+                       encoder_type=encoder_type, 
+                       encoder_params=encoder_params, 
+                       tokenizer_type=tokenizer_type, 
+                       tokenizer_params=tokenizer_params, 
+                       device=device, 
+                       cls=cls, 
+                       stack_feature=stack_feature, 
+                       output_dir=output_dir, 
+                       batch_size=batch_size, 
+                       num_patients=num_patients)
     logger.info("Feature extraction and saving completed successfully.")
 
 

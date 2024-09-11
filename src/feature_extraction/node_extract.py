@@ -7,9 +7,11 @@ import time
 from datetime import timedelta
 from tqdm import tqdm
 from pathlib import Path
+import h5py
 
-from .encoder_factory import EncoderFactory
-from .tokenizer_factory import TokenizerFactory
+from .helpers.encoder_factory import EncoderFactory
+from .helpers.tokenizer_factory import TokenizerFactory
+from .helpers.instance_loaders import PatientLoader
 
 
 def load_data(file_path: str, uni_column: str, num_patients: int = None) -> pd.DataFrame:
@@ -19,39 +21,18 @@ def load_data(file_path: str, uni_column: str, num_patients: int = None) -> pd.D
     return data
 
 
-def preprocess_data(data: pd.DataFrame, text_column: str, uni_column: str, chunk_size: int, sep_token: str = '[SEP]') -> Dict[str, List[str]]:
-    ''''
-    chunk_size: the num(not length) of alt_sequences in one chunk.
-    chunk: a list of alt_sequences/texts with length of chunk_size under one patient.
-    concatenated_chunk: concatenated alt_sequences with sep_token for one chunk.
-    concatenated_chunks: a list of 'concatenated_chunk's of one patient
-    grouped_chunks: a dict with 'patient_id' as keys, while 'concatenated_chunks' as values
-    '''
-    grouped_texts = data.groupby(uni_column)[text_column].apply(list).to_dict()
-    grouped_chunks = {}
-
-    for patient_id, texts in grouped_texts.items():
-        #print('len(texts)', patient_id+'_' +str(len(texts))) # e.g 789 alt_sequences
-        concatenated_chunks = [] # list to store chunks per patient
-        for i in range(0, len(texts), chunk_size): 
-            chunk = texts[i:i + chunk_size]
-            chunk = [text + sep_token for text in chunk] # Add sep_token at the end of each text within a chunk
-            concatenated_chunk = ''.join(chunk) 
-            #print('concatenated_chunk', concatenated_chunk)
-            concatenated_chunks.append(concatenated_chunk)
-        grouped_chunks[patient_id] = concatenated_chunks
-        #print('concatenated_chunks', patient_id+'_' +str(len(concatenated_chunks))) #2 chunks
-        #print('concatenated_chunks', concatenated_chunks)
-    return grouped_chunks
-
-
-def save_feature_tensor(features, output_dir, filename):
-    output_path = output_dir / f"{filename}"
-    torch.save(features, output_path)
+def save_feature_h5(features, output_dir, filename):
+    """ Save features into an h5 file instead of a .pt file """
+    output_path = output_dir / f"{filename}.h5"
+    with h5py.File(output_path, 'w') as hf:
+        hf.create_dataset('feat', data=features.cpu().numpy())  # Save tensor as numpy array
 
 
 def feature_extraction(
-        grouped_chunks: Dict[str, List[str]], 
+        file_path: str,
+        text_column: str, 
+        uni_column: str, 
+        chunk_size: int, 
         encoder_type: str, 
         encoder_params: dict, 
         tokenizer_type: str, 
@@ -59,17 +40,20 @@ def feature_extraction(
         device: str, 
         cls: bool, 
         stack_feature: bool, 
-        output_dir: str):
-    
+        output_dir: str, 
+        sep_token: str = "[SEP]", 
+        batch_size: int = 5,
+        num_patients: int = None):
+        
     has_gpu = torch.cuda.is_available()
     print(f"GPU is available: {has_gpu}")
-    device = torch.device(device) if "cuda" in device and has_gpu else torch.device("cpu")
+    device = torch.device(device if has_gpu and "cuda" in device else "cpu")   
 
+    # Initialize tokenizer and model
     tokenizer = TokenizerFactory.create_tokenizer(tokenizer_type, **tokenizer_params)
     encoder_strategy = EncoderFactory.create_encoder(encoder_type, device, **encoder_params)
     model = encoder_strategy.create_model().to(device)
   
-
     # Create the dynamic output directory path
     dynamic_output_dir = Path(output_dir) / f"{encoder_type}_stack_{stack_feature}_cls_{cls}"
     dynamic_output_dir.mkdir(parents=True, exist_ok=True)
@@ -78,66 +62,54 @@ def feature_extraction(
     logfile_name = f"logfile_{time.strftime('%Y-%m-%d_%H-%M-%S')}_{os.getpid()}.log"
     logdir = dynamic_output_dir / logfile_name
     logging.basicConfig(filename=logdir, level=logging.INFO, format="[%(levelname)s] %(message)s")
-    #logging.getLogger().addHandler(logging.StreamHandler())
-
     logging.info(f"Feature extracting started at: {time.strftime('%Y-%m-%d %H:%M:%S')}")
     logging.info(f"Model: {encoder_type}\n")
 
-    total_start_time = time.time()
-
     # Scan for existing feature files
-    logging.info("Scanning for existing feature ...")
-    existing_instances = [f.stem for f in dynamic_output_dir.glob("**/*.pt")] if dynamic_output_dir.exists() else []
+    logging.info("Scanning for existing features ...")
+    existing_instances = {f.stem.split('_')[0] for f in dynamic_output_dir.glob("**/*.pt")} if dynamic_output_dir.exists() else []
 
-    instances = list(grouped_chunks.keys())
-    grouped_chunks_to_process = {
-        patient_id: chunks
-        for patient_id, chunks in grouped_chunks.items()
-        if patient_id not in existing_instances
-    }
+    # Load data, num_patients is used to limit the data, none as default
+    data = load_data(file_path, uni_column, num_patients=num_patients)
 
-    num_total = len(instances)
+    # Initialize the PatientLoader
+    patient_loader = PatientLoader(data, text_column, uni_column, chunk_size, sep_token, batch_size)
+
     num_processed, num_skipped = 0, 0
-    error_instances: List[str] = []
+    error_instances = []
 
-    if existing_instances:
-        logging.info(f"Skipping {len(existing_instances)} already processed patients out of {num_total} total patients...")
+    # Batch processing
+    for patient_batch in tqdm(patient_loader, desc="\nProcessing patient batches"):
+        for patient_id, chunks in patient_batch.items():
+            if patient_id in existing_instances:
+                logging.info(f"Skipping already processed patient: {patient_id}")
+                num_skipped += 1
+                continue
 
-    for patient_id, chunks in tqdm(grouped_chunks_to_process.items(), desc="\nProcessing patients"):
-        logging.info(f"\n\n===== Processing patient {patient_id} =====")
-        pattern = f"{patient_id}*.pt"
-        matching_files = list(dynamic_output_dir.glob(pattern))
-    
-        if not matching_files: 
+            logging.info(f"Processing patient {patient_id}...")
             try:
                 features_list = []
                 for idx, text in enumerate(chunks):
-                    #print('text length:', len(text))
                     inputs = tokenizer.tokenize(text).to(device)
                     with torch.no_grad():
-                        outputs = model(inputs) # if inputs already include a batch dimension
+                        outputs = model(inputs)  # model embedding
                     features = encoder_strategy.extract_features(outputs, cls)
                     features_list.append(features.cpu())
-                    torch.cuda.empty_cache()  # clean GPU cache
-                    
+                    torch.cuda.empty_cache()
+
                     if not stack_feature:
-                        save_feature_tensor(features, dynamic_output_dir, f"{patient_id}_{idx}.pt")
+                        save_feature_h5(features, dynamic_output_dir, f"{patient_id}_{idx}")
                 
                 if stack_feature:
                     stacked_features = torch.cat(features_list, dim=1)
-                    save_feature_tensor(stacked_features, dynamic_output_dir, f"{patient_id}.pt")
-                
+                    save_feature_h5(stacked_features, dynamic_output_dir, f"{patient_id}")
+
                 num_processed += 1
 
             except Exception as e:
-                logging.error(f"Failed extract features, skipping... Error: {e}")
+                logging.error(f"Failed to extract features for {patient_id}. Error: {e}")
                 error_instances.append(patient_id)
-                continue
-        else:
-            logging.info(".pt file for this patinet already exists. Skipping...")
-            num_skipped += 1
 
-    logging.info(f"\n\n\n===== End-to-end processing time of {num_total} slides: {str(timedelta(seconds=(time.time() - total_start_time)))} =====")
-    logging.info(f"Summary: Processed {num_processed} patients, encountered {len(error_instances)} errors, skipped {num_skipped} slides")
+    logging.info(f"\nFeature extraction completed. Processed: {num_processed}, Skipped: {num_skipped}, Errors: {len(error_instances)}")
     if error_instances:
-        logging.info("The following slides were not processed due to errors:\n  " + "\n  ".join(error_instances))
+        logging.info(f"Errors encountered for the following patients: {', '.join(error_instances)}")

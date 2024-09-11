@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import torch
 from pathlib import Path
 from transformers import AutoModel
-from ..models.hyenadna import HyenaDNAPreTrainedModel
+from ..f_models.hyenadna import HyenaDNAPreTrainedModel
 
 class EncoderStrategy(ABC):
     @abstractmethod
