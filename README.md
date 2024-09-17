@@ -10,7 +10,6 @@ GenML Pipeline is a genomic machine learning pipeline designed to preprocess gen
    * chunk_size: the num(not length) of alt_sequences in one chunk.  
    * chunk: a list of alt_sequences/texts with length of chunk_size under one patient.  
    * concatenated_chunk: concatenated alt_sequences with sep_token for one chunk.  
-   * concatenated_chunks: a list of 'concatenated_chunk's of one patient  
 - Tokenize sequences with configurable tokenizers
 - Extract features using different encoders
 - Support for custom sequence chunk sizes
@@ -80,10 +79,11 @@ To run the pipeline with the specified configurations:
 
 ## To-Do List  
 - [x] Skip feature extraction when feature file is existing  
-- [ ] Remove the register step for tokenizer and encoder  
-- [x] Option to output cls token as embedding  
+- [ ] Remove the register step for tokenizer and encoder   
 - [ ] Dock container  
 - [ ] Include Enformer and nucleotide transformer  
+- [x] Add average pooling, max pooling, cls token  
+- [ ] max-padding within batch  
 
 
 

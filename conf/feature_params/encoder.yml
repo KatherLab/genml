@@ -2,7 +2,12 @@ dnabert2:
   pretrained_model_name: "zhihan1996/DNABERT-2-117M"
 
 hyenadna:
-  pretrained_model_name: "hyenadna-small-32k-seqlen" #"hyenadna-medium-450k-seqlen" #"hyenadna-medium-160k-seqlen" 
+  pretrained_model_name: hyenadna-medium-160k-seqlen #hyenadna-small-32k-seqlen #hyenadna-tiny-1k-seqlen #hyenadna-large-1m-seqlen #hyenadna-medium-450k-seqlen
   model_config_path: /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/06_models/hyenadna_checkpoints  
-  download: True
+  download: False
 
+# hyenadna-tiny-1k-seqlen: 128 # "l_max": 1026, result in Error: The size of tensor a (1026) must match the size of tensor b (32500) at non-singleton dimension 1
+# hyenadna-small-32k-seqlen: 256
+# hyenadna-medium-160k-seqlen: 256
+# hyenadna-medium-450k-seqlen: 256
+# hyenadna-large-1m-seqlen: 256

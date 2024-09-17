@@ -67,7 +67,7 @@ def extract_feature(encoder, tokenizer, chunk_size):
     batch_size = config["batch_size"]
 
     device = config["device"]
-    cls = config["cls_token"]
+    pooling_type = config["pooling_type"]
 
     output_dir = config["output_dir"]
     output_dir = Path(output_dir)
@@ -82,7 +82,7 @@ def extract_feature(encoder, tokenizer, chunk_size):
                        tokenizer_type=tokenizer_type, 
                        tokenizer_params=tokenizer_params, 
                        device=device, 
-                       cls=cls, 
+                       pooling_type=pooling_type, 
                        stack_feature=stack_feature, 
                        output_dir=output_dir, 
                        batch_size=batch_size, 

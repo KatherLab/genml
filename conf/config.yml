@@ -16,9 +16,9 @@ tokenizer_type: "dnabert2_bpe" # "character_tokenizer"  # choose a suitable toke
 
 device: "cuda"  # cuda, or "cpu" if you don't have a GPU
 
-cls_token: False
+pooling_type: cls_token #mean_pooling #max_pooling #full_embedding, otherwise full_embedding
 
-stack_feature: True  # Set to true to stack features for each patient
+stack_feature: True  # Stack features for each patient
 
 batch_size: 64
 

@@ -4,7 +4,6 @@ import os
 from typing import Dict, List
 import logging
 import time
-from datetime import timedelta
 from tqdm import tqdm
 from pathlib import Path
 import h5py
@@ -38,7 +37,7 @@ def feature_extraction(
         tokenizer_type: str, 
         tokenizer_params: dict, 
         device: str, 
-        cls: bool, 
+        pooling_type: str, 
         stack_feature: bool, 
         output_dir: str, 
         sep_token: str = "[SEP]", 
@@ -55,7 +54,7 @@ def feature_extraction(
     model = encoder_strategy.create_model().to(device)
   
     # Create the dynamic output directory path
-    dynamic_output_dir = Path(output_dir) / f"{encoder_type}_stack_{stack_feature}_cls_{cls}"
+    dynamic_output_dir = Path(output_dir) / f"{encoder_type}_stack_{stack_feature}_{pooling_type}"
     dynamic_output_dir.mkdir(parents=True, exist_ok=True)
 
     # Create logfile and set up logging
@@ -92,16 +91,17 @@ def feature_extraction(
                 for idx, text in enumerate(chunks):
                     inputs = tokenizer.tokenize(text).to(device)
                     with torch.no_grad():
-                        outputs = model(inputs)  # model embedding
-                    features = encoder_strategy.extract_features(outputs, cls)
+                        outputs = model(inputs)
+                    features = encoder_strategy.extract_features(outputs, pooling_type)
                     features_list.append(features.cpu())
                     torch.cuda.empty_cache()
 
                     if not stack_feature:
                         save_feature_h5(features, dynamic_output_dir, f"{patient_id}_{idx}")
                 
-                if stack_feature:
-                    stacked_features = torch.cat(features_list, dim=1)
+                if stack_feature:                       
+                    stacked_features = torch.cat(features_list, dim=0)
+                    print('stacked_features shape:', stacked_features.shape)
                     save_feature_h5(stacked_features, dynamic_output_dir, f"{patient_id}")
 
                 num_processed += 1
