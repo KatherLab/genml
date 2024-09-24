@@ -89,9 +89,13 @@ def feature_extraction(
             try:
                 features_list = []
                 for idx, text in enumerate(chunks):
-                    inputs = tokenizer.tokenize(text).to(device)
+                    # tokenization
+                    tok_seq = tokenizer.tokenize(text).to(device)
+                    #print('tok_seq shape:', tok_seq.shape)
+
+                    # faeture extraction
                     with torch.no_grad():
-                        outputs = model(inputs)
+                        outputs = model(tok_seq)
                     features = encoder_strategy.extract_features(outputs, pooling_type)
                     features_list.append(features.cpu())
                     torch.cuda.empty_cache()

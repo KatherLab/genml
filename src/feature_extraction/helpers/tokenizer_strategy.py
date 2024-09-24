@@ -8,22 +8,36 @@ class TokenizationStrategy:
     def tokenize(self, text: str) -> torch.Tensor:
         raise NotImplementedError
 
+
 class DNABERT2BPE(TokenizationStrategy):
     def __init__(self, pretrained_model_name: str):
         self.tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name)
     
     def tokenize(self, text: str) -> torch.Tensor:
-        encoded = self.tokenizer(text, add_special_tokens=True, return_tensors='pt')
-        #print("Shape of encoded['input_ids']:", encoded['input_ids'].shape)
-        return encoded['input_ids']
+        tok_seq = self.tokenizer(text, add_special_tokens=True, return_tensors='pt')
+        tok_seq = tok_seq['input_ids']
+
+        return tok_seq
 
 
-class CharacterTokenizerStrategy(TokenizationStrategy):
+class CharacterTokenizer(TokenizationStrategy):
     def __init__(self, characters=['A', 'C', 'G', 'T', 'N'], model_max_length=512, **kwargs):
         self.tokenizer = CharacterTokenizer(characters=characters, model_max_length=model_max_length+2, padding=False, **kwargs)
     
     def tokenize(self, text: str) -> torch.Tensor:
         """Tokenize text using a character-based tokenizer and return tensor of input IDs."""
-        encoded_input = self.tokenizer(text, add_special_tokens=False, return_tensors='pt')
-        return encoded_input['input_ids']
+        tok_seq = self.tokenizer(text, add_special_tokens=False, return_tensors='pt')
+        tok_seq = tok_seq["input_ids"] # [1, 65]
+        #tok_seq = torch.LongTensor(tok_seq).unsqueeze(0) # unsqueeze for batch dim
 
+        return tok_seq
+
+class CharacterTokenizer2(TokenizationStrategy):
+    def __init__(self, pretrained_model_name: str):
+        self.tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name, trust_remote_code=True)
+    
+    def tokenize(self, text: str) -> torch.Tensor:
+        tok_seq = self.tokenizer(text, add_special_tokens=True, return_tensors='pt')
+        tok_seq = tok_seq['input_ids']
+
+        return tok_seq

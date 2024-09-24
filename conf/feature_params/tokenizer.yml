@@ -5,3 +5,6 @@ character_tokenizer:
   characters: ['A', 'C', 'G', 'T', 'N']
   # CharacterTokenizerStrategy: 提供了一个可选的 model_max_length 参数。如果指定了 model_max_length, 则将所有序列填充到相同的长度, 否则保留原始长度。
   model_max_length: 32770  # For hyenadna-small-32k-seqlen 
+
+character_tokenizer2:
+  pretrained_model_name: LongSafari/hyenadna-medium-160k-seqlen-hf

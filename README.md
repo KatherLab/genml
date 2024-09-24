@@ -48,11 +48,11 @@ To list all available encoders and their corresponding tokenizers:
 2. **Running the Pipeline** <br>
 To run the pipeline with the specified configurations:
    ```sh
-   python -m src extract-feature --encoder <encoder_name> --tokenizer <tokenizer_name> --chunk-size <chunk_size>
+   python -m src extract-feature --encoder <encoder_name> --tokenizer <tokenizer_name>
    ```
    Example:
       ```sh
-      python -m src extract-feature --encoder hyenadna --tokenizer character_tokenizer --chunk-size 500
+      python -m src extract-feature --encoder hyenadna --tokenizer character_tokenizer
       ```
 
 

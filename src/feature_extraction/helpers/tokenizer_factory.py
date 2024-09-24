@@ -1,9 +1,10 @@
-from .tokenizer_strategy import TokenizationStrategy, DNABERT2BPE, CharacterTokenizerStrategy
+from .tokenizer_strategy import TokenizationStrategy, DNABERT2BPE, CharacterTokenizer, CharacterTokenizer2
 
 class TokenizerFactory:
     _strategies = {
         "dnabert2_bpe": DNABERT2BPE,
-        "character_tokenizer": CharacterTokenizerStrategy
+        "character_tokenizer": CharacterTokenizer,
+        "character_tokenizer2": CharacterTokenizer2
     }
 
     @staticmethod

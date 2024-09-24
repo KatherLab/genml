@@ -1,9 +1,10 @@
-from .encoder_strategy import EncoderStrategy, DNABERT2, HyenaDNA, NucleotideTransformer
+from .encoder_strategy import EncoderStrategy, DNABERT2, HyenaDNA, HyenaDNA2, NucleotideTransformer
 
 class EncoderFactory:
     _strategies = {
         "dnabert2": DNABERT2,
         "hyenadna": HyenaDNA,
+        "hyenadna2": HyenaDNA2,
         "nucleotide_trans": NucleotideTransformer
     }
 

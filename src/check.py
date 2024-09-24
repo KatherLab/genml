@@ -21,3 +21,6 @@ else:
 
 # 示例：打印特定特征的数据
 #print(features)  # 或者特定的 key: print(features['some_key'])
+
+#%%
+
