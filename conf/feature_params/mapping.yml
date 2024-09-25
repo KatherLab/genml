@@ -3,3 +3,5 @@ encoder_tokenizer_mapping:
     - character_tokenizer
   dnabert2:
     - dnabert2_bpe
+  nt:
+    - ntKmer

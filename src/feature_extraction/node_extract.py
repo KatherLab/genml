@@ -9,7 +9,7 @@ from pathlib import Path
 import h5py
 
 from .helpers.encoder_factory import EncoderFactory
-from .helpers.tokenizer_factory import TokenizerFactory
+#from .helpers.tokenizer_factory import TokenizerFactory
 from .helpers.instance_loaders import PatientLoader
 
 
@@ -43,15 +43,26 @@ def feature_extraction(
         sep_token: str = "[SEP]", 
         batch_size: int = 5,
         num_patients: int = None):
+    
+    assets_dir = f"{os.environ.get('GEN_RESOURCES_DIR', './assets')}"
         
     has_gpu = torch.cuda.is_available()
     print(f"GPU is available: {has_gpu}")
     device = torch.device(device if has_gpu and "cuda" in device else "cpu")   
 
     # Initialize tokenizer and model
-    tokenizer = TokenizerFactory.create_tokenizer(tokenizer_type, **tokenizer_params)
-    encoder_strategy = EncoderFactory.create_encoder(encoder_type, device, **encoder_params)
-    model = encoder_strategy.create_model().to(device)
+    #tokenizer = TokenizerFactory.create_tokenizer(tokenizer_type, **tokenizer_params)
+    # encoder_strategy = EncoderFactory.create_encoder(encoder_type, device, **encoder_params)
+    # model = encoder_strategy.create_model().to(device)
+
+    # Initialize the encoder strategy (which includes tokenizer and model)
+    encoder_strategy = EncoderFactory.create_encoder(
+        encoder_type=encoder_type, 
+        tokenizer_type=tokenizer_type, 
+        tokenizer_params=tokenizer_params, 
+        device=device, 
+        **encoder_params
+    )
   
     # Create the dynamic output directory path
     dynamic_output_dir = Path(output_dir) / f"{encoder_type}_stack_{stack_feature}_{pooling_type}"
@@ -90,13 +101,20 @@ def feature_extraction(
                 features_list = []
                 for idx, text in enumerate(chunks):
                     # tokenization
-                    tok_seq = tokenizer.tokenize(text).to(device)
+                    #tok_seq = tokenizer.tokenize(text).to(device)
                     #print('tok_seq shape:', tok_seq.shape)
 
                     # faeture extraction
-                    with torch.no_grad():
-                        outputs = model(tok_seq)
-                    features = encoder_strategy.extract_features(outputs, pooling_type)
+                    # with torch.no_grad():
+                    #     outputs = model(tok_seq)
+                    # features = encoder_strategy.extract_features(outputs, pooling_type)
+
+                    # Feature extraction using encoder strategy
+                    #features = encoder_strategy.encode(tok_seq, feature_type=pooling_type)
+
+                    # Directly call the encoder strategy to process the text and extract features
+                    features = encoder_strategy.encode(text, feature_type=pooling_type)
+
                     features_list.append(features.cpu())
                     torch.cuda.empty_cache()
 

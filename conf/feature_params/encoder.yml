@@ -13,4 +13,7 @@ hyenadna:
 # hyenadna-large-1m-seqlen: 256
 
 hyenadna2:
-  pretrained_model_name: LongSafari/hyenadna-medium-160k-seqlen-hf
+  pretrained_model_name: "LongSafari/hyenadna-medium-160k-seqlen-hf"
+
+nt:
+  pretrained_model_name: InstaDeepAI/nucleotide-transformer-v2-500m-multi-species

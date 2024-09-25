@@ -20,7 +20,7 @@ class DNABERT2BPE(TokenizationStrategy):
         return tok_seq
 
 
-class CharacterTokenizer(TokenizationStrategy):
+class HD_CharacterTokenizer(TokenizationStrategy):
     def __init__(self, characters=['A', 'C', 'G', 'T', 'N'], model_max_length=512, **kwargs):
         self.tokenizer = CharacterTokenizer(characters=characters, model_max_length=model_max_length+2, padding=False, **kwargs)
     
@@ -32,9 +32,19 @@ class CharacterTokenizer(TokenizationStrategy):
 
         return tok_seq
 
-class CharacterTokenizer2(TokenizationStrategy):
+class HD_CharacterTokenizer2(TokenizationStrategy):
     def __init__(self, pretrained_model_name: str):
         self.tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name, trust_remote_code=True)
+    
+    def tokenize(self, text: str) -> torch.Tensor:
+        tok_seq = self.tokenizer(text, add_special_tokens=True, return_tensors='pt')
+        tok_seq = tok_seq['input_ids']
+
+        return tok_seq
+    
+class NTkmer(TokenizationStrategy):
+    def __init__(self, pretrained_model_name: str):
+        self.tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name)
     
     def tokenize(self, text: str) -> torch.Tensor:
         tok_seq = self.tokenizer(text, add_special_tokens=True, return_tensors='pt')

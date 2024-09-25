@@ -8,3 +8,6 @@ character_tokenizer:
 
 character_tokenizer2:
   pretrained_model_name: LongSafari/hyenadna-medium-160k-seqlen-hf
+
+ntKmer:
+  pretrained_model_name: InstaDeepAI/nucleotide-transformer-v2-500m-multi-species

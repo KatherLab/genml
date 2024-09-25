@@ -10,13 +10,13 @@ num_patients: 200 # default None, used to limit the data
 
 chunk_size: 1  # the num of sequences to be concatenated
 
-encoder_name: "dnabert2" # "hyenadna"  # or "DNABERT2"
+encoder_name: nt #dnabert2 # "hyenadna"  # or "DNABERT2"
 
-tokenizer_type: "dnabert2_bpe" # "character_tokenizer"  # choose a suitable tokenizer based on model
+tokenizer_type: ntKmer #dnabert2_bpe # "character_tokenizer"  # choose a suitable tokenizer based on model
 
 device: "cuda"  # cuda, or "cpu" if you don't have a GPU
 
-pooling_type: mean_pooling #cls_token #max_pooling #full_embedding, otherwise full_embedding
+pooling_type: cls_token #max_pooling #mean_pooling #full_embedding, otherwise full_embedding
 
 stack_feature: True  # Stack features for each patient
 

@@ -5,7 +5,7 @@ class EncoderFactory:
         "dnabert2": DNABERT2,
         "hyenadna": HyenaDNA,
         "hyenadna2": HyenaDNA2,
-        "nucleotide_trans": NucleotideTransformer
+        "nt": NucleotideTransformer
     }
 
     @staticmethod

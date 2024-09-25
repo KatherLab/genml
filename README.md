@@ -84,6 +84,8 @@ To run the pipeline with the specified configurations:
 - [ ] Include Enformer and nucleotide transformer  
 - [x] Add average pooling, max pooling, cls token  
 - [ ] max-padding within batch  
+- [ ] avarage token  
+- [ ] store foundation model cache    
 
 
 
