@@ -11,3 +11,6 @@ character_tokenizer2:
 
 ntKmer:
   pretrained_model_name: InstaDeepAI/nucleotide-transformer-v2-500m-multi-species
+
+efOnehot:
+  pretrained_model_name: EleutherAI/enformer-official-rough

@@ -1,7 +1,10 @@
-from transformers import AutoTokenizer
-from ..tokenizers.CharacterTokenizer import CharacterTokenizer
 import torch
 from typing import List
+
+from transformers import AutoTokenizer
+from enformer_pytorch import str_to_one_hot
+
+from ..tokenizers.CharacterTokenizer import CharacterTokenizer
 
 
 class TokenizationStrategy:
@@ -49,5 +52,14 @@ class NTkmer(TokenizationStrategy):
     def tokenize(self, text: str) -> torch.Tensor:
         tok_seq = self.tokenizer(text, add_special_tokens=True, return_tensors='pt')
         tok_seq = tok_seq['input_ids']
+
+        return tok_seq
+
+
+class EFonehot(TokenizationStrategy):
+    def __init__(self, pretrained_model_name: str):
+        pass
+    def tokenize(self, text: str) -> torch.Tensor:
+        tok_seq = str_to_one_hot(text)
 
         return tok_seq

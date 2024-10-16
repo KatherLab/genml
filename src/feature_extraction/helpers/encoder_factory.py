@@ -1,11 +1,12 @@
-from .encoder_strategy import EncoderStrategy, DNABERT2, HyenaDNA, HyenaDNA2, NucleotideTransformer
+from .encoder_strategy import EncoderStrategy, DNABERT2, HyenaDNA, HyenaDNA2, NucleotideTransformer #, EnFormer
 
 class EncoderFactory:
     _strategies = {
         "dnabert2": DNABERT2,
         "hyenadna": HyenaDNA,
-        "hyenadna2": HyenaDNA2,
-        "nt": NucleotideTransformer
+        #"hyenadna2": HyenaDNA2,
+        "nt": NucleotideTransformer,
+        #"ef": EnFormer
     }
 
     @staticmethod

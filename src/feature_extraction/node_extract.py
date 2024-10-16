@@ -9,7 +9,7 @@ from pathlib import Path
 import h5py
 
 from .helpers.encoder_factory import EncoderFactory
-#from .helpers.tokenizer_factory import TokenizerFactory
+# from .helpers.tokenizer_factory import TokenizerFactory
 from .helpers.instance_loaders import PatientLoader
 
 
@@ -40,7 +40,6 @@ def feature_extraction(
         pooling_type: str, 
         stack_feature: bool, 
         output_dir: str, 
-        sep_token: str = "[SEP]", 
         batch_size: int = 5,
         num_patients: int = None):
     
@@ -51,7 +50,7 @@ def feature_extraction(
     device = torch.device(device if has_gpu and "cuda" in device else "cpu")   
 
     # Initialize tokenizer and model
-    #tokenizer = TokenizerFactory.create_tokenizer(tokenizer_type, **tokenizer_params)
+    # tokenizer = TokenizerFactory.create_tokenizer(tokenizer_type, **tokenizer_params)
     # encoder_strategy = EncoderFactory.create_encoder(encoder_type, device, **encoder_params)
     # model = encoder_strategy.create_model().to(device)
 
@@ -83,7 +82,7 @@ def feature_extraction(
     data = load_data(file_path, uni_column, num_patients=num_patients)
 
     # Initialize the PatientLoader
-    patient_loader = PatientLoader(data, text_column, uni_column, chunk_size, sep_token, batch_size)
+    patient_loader = PatientLoader(data, text_column, uni_column, chunk_size, batch_size)
 
     num_processed, num_skipped = 0, 0
     error_instances = []
@@ -97,40 +96,37 @@ def feature_extraction(
                 continue
 
             logging.info(f"Processing patient {patient_id}...")
-            try:
-                features_list = []
-                for idx, text in enumerate(chunks):
-                    # tokenization
-                    #tok_seq = tokenizer.tokenize(text).to(device)
-                    #print('tok_seq shape:', tok_seq.shape)
+            # try:
+            features_list = []
+            for idx, text in enumerate(chunks):
+                # tokenization
+                #tok_seq = tokenizer.tokenize(text).to(device)
+                #print('tok_seq shape:', tok_seq.shape)
 
-                    # faeture extraction
-                    # with torch.no_grad():
-                    #     outputs = model(tok_seq)
-                    # features = encoder_strategy.extract_features(outputs, pooling_type)
+                # faeture extraction
+                # with torch.no_grad():
+                #     outputs = model(tok_seq)
+                # features = encoder_strategy.extract_features(outputs, pooling_type)
 
-                    # Feature extraction using encoder strategy
-                    #features = encoder_strategy.encode(tok_seq, feature_type=pooling_type)
+                # Directly call the encoder strategy to process the text and extract features
+                features = encoder_strategy.encode(text, feature_type=pooling_type)
 
-                    # Directly call the encoder strategy to process the text and extract features
-                    features = encoder_strategy.encode(text, feature_type=pooling_type)
+                features_list.append(features.cpu())
+                torch.cuda.empty_cache()
 
-                    features_list.append(features.cpu())
-                    torch.cuda.empty_cache()
+                if not stack_feature:
+                    save_feature_h5(features, dynamic_output_dir, f"{patient_id}_{idx}")
+            
+            if stack_feature:                       
+                stacked_features = torch.cat(features_list, dim=0)
+                print('stacked_features shape:', stacked_features.shape)
+                save_feature_h5(stacked_features, dynamic_output_dir, f"{patient_id}")
 
-                    if not stack_feature:
-                        save_feature_h5(features, dynamic_output_dir, f"{patient_id}_{idx}")
-                
-                if stack_feature:                       
-                    stacked_features = torch.cat(features_list, dim=0)
-                    print('stacked_features shape:', stacked_features.shape)
-                    save_feature_h5(stacked_features, dynamic_output_dir, f"{patient_id}")
+            num_processed += 1
 
-                num_processed += 1
-
-            except Exception as e:
-                logging.error(f"Failed to extract features for {patient_id}. Error: {e}")
-                error_instances.append(patient_id)
+            # except Exception as e:
+            #     logging.error(f"Failed to extract features for {patient_id}. Error: {e}")
+            #     error_instances.append(patient_id)
 
     logging.info(f"\nFeature extraction completed. Processed: {num_processed}, Skipped: {num_skipped}, Errors: {len(error_instances)}")
     if error_instances:

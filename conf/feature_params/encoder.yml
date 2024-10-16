@@ -1,9 +1,11 @@
 dnabert2:
-  pretrained_model_name: "zhihan1996/DNABERT-2-117M"
+  pretrained_model_name: zhihan1996/DNABERT-2-117M
+  cache_dir: /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/06_models/dnabert2
+  download: False
 
 hyenadna:
   pretrained_model_name: hyenadna-medium-160k-seqlen #hyenadna-small-32k-seqlen #hyenadna-tiny-1k-seqlen #hyenadna-large-1m-seqlen #hyenadna-medium-450k-seqlen
-  model_config_path: /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/06_models/hyenadna_checkpoints  
+  cache_dir: /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/06_models/hyenadna_checkpoints  
   download: False
 
 # hyenadna-tiny-1k-seqlen: 128 
@@ -13,7 +15,12 @@ hyenadna:
 # hyenadna-large-1m-seqlen: 256
 
 hyenadna2:
-  pretrained_model_name: "LongSafari/hyenadna-medium-160k-seqlen-hf"
+  pretrained_model_name: LongSafari/hyenadna-medium-160k-seqlen-hf
 
 nt:
   pretrained_model_name: InstaDeepAI/nucleotide-transformer-v2-500m-multi-species
+  #cache_dir: /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/06_models/nt_transformer
+
+ef:
+  pretrained_model_name: EleutherAI/enformer-official-rough
+  cache_dir: /mnt/bulk-io/lizhang/LiWorkSpace/genomics/data/06_models/enformer
