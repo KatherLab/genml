@@ -79,17 +79,7 @@ To run the pipeline with the specified configurations(go to genml):
 
 3. **After validating a pair of Tokenizer and Encoder**  <br>
    Add the mapping to conf/feature_params/mapping.yml
-
-## To-Do List  
-- [x] Skip feature extraction when feature file is existing  
-- [ ] Remove the register step for tokenizer and encoder   
-- [ ] Dock container  
-- [ ] Include Enformer
-- [x] Include nucleotide transformer  
-- [x] Add average pooling, max pooling, cls token  
-- [ ] max-padding within batch  
-- [ ] avarage token  
-- [ ] store foundation model cache    
+  
 
 
 
