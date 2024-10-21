@@ -53,10 +53,6 @@ To run the pipeline with the specified configurations(go to genml):
    ```sh
    python -m src extract-feature
    ```
-   Example:
-      ```sh
-      python -m src extract-feature
-      ```
 
 
 
