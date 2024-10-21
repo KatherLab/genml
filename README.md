@@ -61,8 +61,11 @@ To run the pipeline with the specified configurations(go to genml):
 
 
 ## Configuration
-## Project Structure
-![image](https://gitlab.hrz.tu-chemnitz.de/lizh574c--tu-dresden.de/genml/-/blob/master/docs/DFD.png?ref_type=heads)
+uni_column: the column of patient id  
+text_column: the column of mutation sequence  
+chunk_size: keep it as 1 now  
+encoder_name and tokenizer_type: use the correct pair after listing available encoders and tokenizers  
+
 
 ## Contributing
 

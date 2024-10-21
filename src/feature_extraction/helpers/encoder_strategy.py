@@ -35,7 +35,7 @@ class EncoderStrategy(ABC):
         return self.extract_features(outputs, feature_type)
         
     @abstractmethod
-    def extract_features(self, outputs, pooling_type, per_mut: bool = False) -> torch.Tensor:
+    def extract_features(self, outputs, pooling_type) -> torch.Tensor:
         """Method to extract specific features from the model outputs."""
         pass
 
@@ -57,7 +57,7 @@ class DNABERT2(EncoderStrategy):
             print(f"Loading model from cache directory: {model_path}")
             return AutoModel.from_pretrained(model_path, trust_remote_code=True)
 
-    def extract_features(self, outputs, pooling_type, per_mut: bool = False) -> torch.Tensor:
+    def extract_features(self, outputs, pooling_type) -> torch.Tensor:
         hidden_states = outputs[0] # [1, sequence_length, 768]
         print('hidden_states shape:', hidden_states.shape)
 

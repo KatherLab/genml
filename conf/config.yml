@@ -16,8 +16,6 @@ device: "cuda"  # cuda, or "cpu" if you don't have a GPU
 
 pooling_type: mean_pooling #, otherwise cls_token/end_token
 
-per_mut: True
-
 stack_feature: True  # Stack features for each patient
 
 batch_size: 64
