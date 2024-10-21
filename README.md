@@ -39,20 +39,23 @@ GenML Pipeline is a genomic machine learning pipeline designed to preprocess gen
 
 ## Usage
 
-1. **Listing Available Encoders and Tokenizers** <br>
-To list all available encoders and their corresponding tokenizers:
+1. **Configuration** <br>
+Go to genml/conf to set the parameter configuration.
+
+2. **Listing Available Encoders and Tokenizers** <br>
+To list all available encoders and their corresponding tokenizers(go to genml):
    ```sh
    python -m src list-encoders
    ```
 
-2. **Running the Pipeline** <br>
-To run the pipeline with the specified configurations:
+3. **Running the Pipeline** <br>
+To run the pipeline with the specified configurations(go to genml):
    ```sh
-   python -m src extract-feature --encoder <encoder_name> --tokenizer <tokenizer_name>
+   python -m src extract-feature
    ```
    Example:
       ```sh
-      python -m src extract-feature --encoder hyenadna --tokenizer character_tokenizer
+      python -m src extract-feature
       ```
 
 
@@ -81,7 +84,8 @@ To run the pipeline with the specified configurations:
 - [x] Skip feature extraction when feature file is existing  
 - [ ] Remove the register step for tokenizer and encoder   
 - [ ] Dock container  
-- [ ] Include Enformer and nucleotide transformer  
+- [ ] Include Enformer
+- [x] Include nucleotide transformer  
 - [x] Add average pooling, max pooling, cls token  
 - [ ] max-padding within batch  
 - [ ] avarage token  

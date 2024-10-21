@@ -4,7 +4,7 @@ uni_column: "Patient_ID"
 
 text_column: "Alt_Sequence"
 
-num_patients: 200 # default None, used to limit the data
+num_patients: #2 # default None, used to limit the data
 
 chunk_size: 1  # the num of sequences to be concatenated
 
@@ -14,7 +14,7 @@ tokenizer_type: dnabert2_bpe #ntKmer #character_tokenizer #efOnehot  # choose a 
 
 device: "cuda"  # cuda, or "cpu" if you don't have a GPU
 
-pooling_type: mean_pooling #, otherwise cls_token
+pooling_type: mean_pooling #, otherwise cls_token/end_token
 
 per_mut: True
 
