@@ -41,8 +41,8 @@ GenML Pipeline is a genomic machine learning pipeline designed to preprocess gen
 
 1. **Configuration** <br>
 Go to genml/conf to set the parameter configuration.  
-- config.yml is for the feature extraction process.
-- feature_params/encoder.yml is for the foundation models you will use, set the download as True at the first time.
+   - config.yml is for the feature extraction process. 
+   - feature_params/encoder.yml is for the foundation models you will use, set the download as True at the first time.
 
 2. **Listing Available Encoders and Tokenizers** <br>
 To list all available encoders and their corresponding tokenizers(go to genml):
