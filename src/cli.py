@@ -2,7 +2,7 @@ import click
 import yaml
 import logging.config
 from pathlib import Path
-from .feature_extraction.node_extract import feature_extraction
+from .feature_extraction.feats_extract import extract_feats
 
 def setup_logging():
     config_path = Path(__file__).parent.parent / "conf" / "logging.yml"
@@ -23,7 +23,7 @@ def load_params(file_path):
     return params
 
 def load_mapping():
-    mapping_path = Path(__file__).parent.parent / "conf" / "feature_params" / "mapping.yml"
+    mapping_path = Path(__file__).parent.parent / "conf" / "model_params" / "mapping.yml"
     with open(mapping_path, "r") as f:
         mapping = yaml.safe_load(f)
     return mapping
@@ -35,9 +35,7 @@ def cli():
 
 @cli.command()
 @click.option('--encoder', default=None, help='Specify encoder type (e.g., hyenadna, dnabert2)')
-@click.option('--tokenizer', default=None, help='Specify tokenizer type (e.g., character_tokenizer, dnabert2_bpe)')
-@click.option('--chunk-size', default=None, type=int, help='Specify the chunk size for concatenating sequences')
-def extract_feature(encoder, tokenizer, chunk_size):
+def extract_feature(encoder):
     """Run the main pipeline"""
     setup_logging()
     logger = logging.getLogger(__name__)
@@ -46,25 +44,17 @@ def extract_feature(encoder, tokenizer, chunk_size):
     logger.info(f"Config loaded: {config}")
 
     encoder_type = encoder if encoder else config["encoder_name"]
-    tokenizer_type = tokenizer if tokenizer else config["tokenizer_type"]
-    encoder_params = load_params("conf/feature_params/encoder.yml")[encoder_type]
-    tokenizer_params = load_params("conf/feature_params/tokenizer.yml")[tokenizer_type]
-
-    chunk_size = chunk_size if chunk_size else config.get("chunk_size", 10)
+    encoder_params = load_params("conf/model_params/encoder.yml")[encoder_type]
 
     logger.info(f"Using encoder: {encoder_type} with params: {encoder_params}")
-    logger.info(f"Using tokenizer: {tokenizer_type} with params: {tokenizer_params}")
-    logger.info(f"Using sequence chunk size: {chunk_size}")
-
-    stack_feature = config.get("stack_feature", True)
-    logger.info(f"Stack feature: {stack_feature}")
 
     raw_data_path = config["filepath"]
     raw_data_path = Path(raw_data_path)
-    uni_column = config["uni_column"]
-    text_column = config["text_column"]
+    pat_column = config["pat_column"]
+    mut_column = config["mut_column"]
     num_patients = config["num_patients"]
     batch_size = config["batch_size"]
+    num_workers = config["num_workers"]
 
     device = config["device"]
     pooling_type = config["pooling_type"]
@@ -73,19 +63,16 @@ def extract_feature(encoder, tokenizer, chunk_size):
     output_dir = Path(output_dir)
 
     logger.info("Start feature extraction.")
-    feature_extraction(file_path=raw_data_path, 
-                       text_column=text_column, 
-                       uni_column=uni_column, 
-                       chunk_size=chunk_size, 
+    extract_feats(file_path=raw_data_path, 
+                       mut_column=mut_column, 
+                       pat_column=pat_column, 
                        encoder_type=encoder_type, 
                        encoder_params=encoder_params, 
-                       tokenizer_type=tokenizer_type, 
-                       tokenizer_params=tokenizer_params, 
                        device=device, 
                        pooling_type=pooling_type, 
-                       stack_feature=stack_feature, 
                        output_dir=output_dir, 
                        batch_size=batch_size, 
+                       num_workers = num_workers, 
                        num_patients=num_patients)
     logger.info("Feature extraction and saving completed successfully.")
 

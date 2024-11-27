@@ -1,6 +1,3 @@
-# Ignore the large CSV file
-data/01_raw/tcga_mutations_controlled.csv
-
 # Ignore all .DS_Store files
 **/.DS_Store
 

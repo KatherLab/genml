@@ -1,12 +1,11 @@
-from .encoder_strategy import EncoderStrategy, DNABERT2, HyenaDNA, HyenaDNA2, NucleotideTransformer #, EnFormer
+from .encoders import *
 
 class EncoderFactory:
     _strategies = {
-        "dnabert2": DNABERT2,
-        "hyenadna": HyenaDNA,
-        #"hyenadna2": HyenaDNA2,
+        "db2": DNABERT2,
+        "hd": HyenaDNA,
         "nt": NucleotideTransformer,
-        #"ef": EnFormer
+        "gv": GROVER,
     }
 
     @staticmethod
@@ -14,6 +13,8 @@ class EncoderFactory:
         strategy_class = EncoderFactory._strategies.get(encoder_type)
         if not strategy_class:
             raise ValueError(f"Unsupported encoder type: {encoder_type}")
-        #return strategy_class(**kwargs)
+
         return strategy_class(device=device, **kwargs)
+
+
 

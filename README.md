@@ -6,13 +6,9 @@ GenML Pipeline is a genomic machine learning pipeline designed to preprocess gen
 
 ## Features
 
-- Load and preprocess genomic data
-   * chunk_size: the num(not length) of alt_sequences in one chunk.  
-   * chunk: a list of alt_sequences/texts with length of chunk_size under one patient.  
-   * concatenated_chunk: concatenated alt_sequences with sep_token for one chunk.  
-- Tokenize sequences with configurable tokenizers
-- Extract features using different encoders
-- Support for custom sequence chunk sizes
+- Load and preprocess genomic data, e.g sequences 
+- Tokenize sequences with loaded tokenizers
+- Extract features using different encoders/foundation models
 - Easy configuration through YAML files
 
 ## Installation
@@ -35,6 +31,14 @@ GenML Pipeline is a genomic machine learning pipeline designed to preprocess gen
 
    ```sh
    pip install -r requirements.txt
+   ```
+   Tips: for DNABERT2, 
+   ```sh
+   pip install -r requirements_db2.txt
+   ```
+   and then 
+   ```sh
+   pip uninstall triton
    ```
 
 ## Usage
@@ -59,21 +63,15 @@ To run the pipeline with the specified configurations(go to genml):
 
 
 ## Configuration
-- uni_column: the column of patient id  
-- text_column: the column of mutation sequence  
-- chunk_size: keep it as 1 now  
-- encoder_name and tokenizer_type: use the correct pair after listing available encoders and tokenizers  
+- pat_column: the column of patient id  
+- mut_column: the column of mutation sequence  
+- encoder_name: use the correct encoder after listing available encoders and tokenizers  
 
 
 ## Contributing
 
 (Create a new branch firstly.)
-1. **Including a new Tokenizer**  <br>
-   a. Add a class NewTokenizerStrategy(TokenizationStrategy) in 'src/feature_extraction/tokenizer_strategy.py'  
-   b. Register the new Tokeniter to 'src/feature_extraction/tokenizer_factory.py'  
-   c. Set up for the new Tokenizer in 'conf/feature_params/tokenizer.yml'  
-
-2. **Including a new Encoder**  <br>
+1. **Including a new Encoder**  <br>
    a. Add a class NewEncoderStrategy(EncoderStrategy) in 'src/feature_extraction/encoder_strategy.py'  
    b. Register the new Encoder to 'src/feature_extraction/encoder_factory.py'  
    c. Set up for the new Encoder in 'conf/feature_params/encoder.yml'  

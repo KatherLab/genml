@@ -1,0 +1,24 @@
+db2:
+  pretrained_model_name: zhihan1996/DNABERT-2-117M
+  cache_dir: /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/data/06_checkpoints/dnabert2
+  download: False
+
+hd:
+  pretrained_model_name: LongSafari/hyenadna-medium-160k-seqlen-hf
+  cache_dir: /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/data/06_checkpoints/hyenadna
+  download: False
+
+nt:
+  pretrained_model_name: InstaDeepAI/nucleotide-transformer-v2-500m-multi-species
+  cache_dir: /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/data/06_checkpoints/nt_transformer
+  download: False
+
+# ef:
+#   pretrained_model_name: EleutherAI/enformer-official-rough
+#   cache_dir: /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/data/06_checkpoints/enformer
+#   download: False
+
+gv:
+  pretrained_model_name: PoetschLab/GROVER
+  cache_dir: /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/data/06_checkpoints/grover
+  download: False

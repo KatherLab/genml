@@ -4,7 +4,6 @@ pandas==2.2.2
 PyYAML==6.0.1
 torch==2.3.1
 torchvision==0.18.1
-transformers==4.46.3
+transformers==4.28.0
 omegaconf==2.3.0
 h5py==3.11.0
-auto-gptq==0.7.1
