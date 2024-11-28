@@ -26,7 +26,9 @@ GenML Pipeline is a genomic machine learning pipeline designed to preprocess gen
    python -m venv .venv
    source .venv/bin/activate
    ```
+   or install Anaconda to create env.
 
+   
 3. **Install the required dependencies:**
 
    ```sh
