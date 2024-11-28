@@ -3330,3 +3330,16 @@ Feature extraction completed. Processed: 1, Skipped: 0, Errors: 0 [in /mnt/bulk-
 2024-11-27 20:37:57,229 - root - INFO - 
 Feature extraction completed. Processed: 1, Skipped: 0, Errors: 0 [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/feature_extraction/feats_extract.py:156]
 2024-11-27 20:37:57,232 - src.cli - INFO - Feature extraction and saving completed successfully. [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/cli.py:77]
+2024-11-28 12:24:26,298 - src.cli - INFO - Config loaded: {'filepath': '/mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/data/01_raw/tcga_mutations_controlled.csv', 'pat_column': 'Patient_ID', 'mut_column': 'Alt_Sequence', 'num_patients': 1, 'encoder_name': 'gv', 'device': 'cuda:0', 'pooling_type': 'mean_pooling', 'batch_size': 64, 'num_workers': 4, 'output_dir': '/mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/data/04_feature'} [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/cli.py:44]
+2024-11-28 12:24:26,301 - src.cli - INFO - Using encoder: gv with params: {'pretrained_model_name': 'PoetschLab/GROVER', 'cache_dir': '/mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/data/06_checkpoints/grover', 'download': False} [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/cli.py:49]
+2024-11-28 12:24:26,313 - src.cli - INFO - Start feature extraction. [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/cli.py:65]
+2024-11-28 12:24:26,340 - root - INFO - Loading tokenizer from checkpoint: /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/data/06_checkpoints/grover/models--PoetschLab--GROVER/snapshots/f6ed259a321aacb629cf638a1568c2a40b381cfe [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/feature_extraction/helpers/encoders.py:35]
+2024-11-28 12:24:26,380 - root - INFO - Loading model from cache directory: /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/data/06_checkpoints/grover/models--PoetschLab--GROVER/snapshots/f6ed259a321aacb629cf638a1568c2a40b381cfe [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/feature_extraction/helpers/encoders.py:204]
+2024-11-28 12:24:30,789 - root - INFO - Feature extraction started at: 2024-11-28 12:24:30 [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/feature_extraction/feats_extract.py:66]
+2024-11-28 12:24:30,789 - root - INFO - Model: gv
+ [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/feature_extraction/feats_extract.py:67]
+2024-11-28 12:24:30,789 - root - INFO - Scanning for existing features... [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/feature_extraction/feats_extract.py:70]
+2024-11-28 12:26:14,859 - root - INFO - Saved features for patient TCGA-02-0003, final extracted features shape torch.Size([789, 609]) [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/feature_extraction/feats_extract.py:153]
+2024-11-28 12:26:14,859 - root - INFO - 
+Feature extraction completed. Processed: 1, Skipped: 0, Errors: 0 [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/feature_extraction/feats_extract.py:156]
+2024-11-28 12:26:14,865 - src.cli - INFO - Feature extraction and saving completed successfully. [in /mnt/bulk-uranus/lizhang/LiWorkSpace/genomics/genml/src/cli.py:77]
