@@ -32,7 +32,7 @@ GenML Pipeline is a genomic machine learning pipeline designed to preprocess gen
    ```sh
    pip install -r requirements.txt
    ```
-   Tips: for DNABERT2, 
+   Tips: for DNABERT2, additional env is suggested, and then
    ```sh
    pip install -r requirements_db2.txt
    ```
