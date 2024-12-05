@@ -177,8 +177,7 @@ class NucleotideTransformer(EncoderStrategy):
         else:
             raise ValueError(f"Invalid pooling_type: {pooling_type}. Expected 'mean_pooling'.")
         
-        print('embedding.shape:', embedding.shape)
-        # print('embedding:', embedding)
+        # print('embedding.shape:', embedding.shape)
 
         return embedding
     

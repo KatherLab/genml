@@ -82,8 +82,8 @@ def list_encoders():
     """List available encoders and their corresponding tokenizers"""
     mapping = load_mapping()
     for encoder, tokenizers in mapping["encoder_tokenizer_mapping"].items():
-        click.echo(f"Encoder: {encoder}")
-        click.echo(f"  Tokenizers: {', '.join(tokenizers)}")
+        click.echo(f"Encoder_Name: {encoder}")
+        click.echo(f"Tokenizer and Encoder: {', '.join(tokenizers)}")
 
 
 if __name__ == "__main__":

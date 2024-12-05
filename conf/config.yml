@@ -6,7 +6,7 @@ mut_column: "Alt_Sequence"
 
 num_patients: 1 # default None, specific number is used to limit the data
 
-encoder_name: gv #nt #hd #db2
+encoder_name: nt #nt #hd #db2
 
 device: "cuda:0"  # or "cpu" if you don't have a GPU
 

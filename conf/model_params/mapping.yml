@@ -1,13 +1,9 @@
 encoder_tokenizer_mapping:
   hd:
-    - char
-    - HyenaDNA
+    - char, HyenaDNA
   db2:
-    - bpe
-    - DNABERT2
+    - bpe, DNABERT2
   nt:
-    - k-mer
-    - NucleotideTransformer
+    - k-mer, NucleotideTransformer
   gv:
-    - bpe
-    - GROVER
+    - bpe, GROVER
